@@ -35,8 +35,19 @@ logging.getLogger("aiogram").setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 async def on_startup(bot: Bot):
-    # Ensure ffmpeg is available in path
-    static_ffmpeg.add_paths()
+    # Ensure ffmpeg is available
+    try:
+        import subprocess
+        subprocess.run(["ffmpeg", "-version"], check=True, capture_output=True)
+        logger.info("✅ System FFmpeg detected.")
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        logger.warning("⚠️ System FFmpeg not found, attempting to use static-ffmpeg...")
+        try:
+            import static_ffmpeg
+            static_ffmpeg.add_paths()
+            logger.info("✅ static-ffmpeg activated.")
+        except Exception as e:
+            logger.error(f"❌ Could not initialize FFmpeg: {e}")
     
     init_db()
     Path(DOWNLOAD_DIR).mkdir(parents=True, exist_ok=True)
