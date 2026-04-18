@@ -4,3 +4,4 @@ python-dotenv
 aiohttp
 aiofiles
 certifi
+static-ffmpeg

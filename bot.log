@@ -3669,3 +3669,12 @@ TypeError: process_broadcast() got an unexpected keyword argument 'dispatcher'
 2026-04-18 00:42:30,247 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
 2026-04-18 00:42:30,500 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
 2026-04-18 00:42:30,501 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-18 00:42:35,221 | INFO     | __main__ | Starting Polling...
+2026-04-18 00:42:35,651 | INFO     | database.db | Database initialized
+2026-04-18 00:42:35,791 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-18 00:42:35,791 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-18 00:42:35,791 | INFO     | aiogram.dispatcher | Start polling
+2026-04-18 00:42:35,931 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-18 00:43:01,633 | INFO     | aiogram.event | Update id=55587268 is handled. Duration 484 ms by bot id=8211473742
+2026-04-18 00:43:26,699 | INFO     | aiogram.event | Update id=55587269 is handled. Duration 2417 ms by bot id=8211473742
+2026-04-18 00:44:15,387 | INFO     | aiogram.event | Update id=55587270 is handled. Duration 3217 ms by bot id=8211473742

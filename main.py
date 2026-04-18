@@ -3,6 +3,7 @@ import io
 import asyncio
 import logging
 from pathlib import Path
+import static_ffmpeg
 
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
@@ -34,6 +35,9 @@ logging.getLogger("aiogram").setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 async def on_startup(bot: Bot):
+    # Ensure ffmpeg is available in path
+    static_ffmpeg.add_paths()
+    
     init_db()
     Path(DOWNLOAD_DIR).mkdir(parents=True, exist_ok=True)
     cleanup_old_files(max_age_hours=1)
