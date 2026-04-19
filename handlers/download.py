@@ -13,7 +13,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 import downloader as dl
-from config import BOT_NAME
+from config import BOT_NAME, FAST_UPLOAD_DOCUMENT_THRESHOLD_MB
 from database import db
 from utils.helpers import (
     format_bytes,
@@ -45,6 +45,7 @@ _PLATFORM_EMOJI = {
 }
 
 _DEFAULT_AUDIO_QUALITY = "320"
+_FAST_UPLOAD_DOCUMENT_THRESHOLD_BYTES = FAST_UPLOAD_DOCUMENT_THRESHOLD_MB * 1024 * 1024
 
 
 def _build_info_caption(info: Dict, title_limit: int = 60) -> str:
@@ -262,8 +263,11 @@ async def cb_start_download(query: types.CallbackQuery, bot: Bot):
     await _queue_download(query, bot, info, mtype, quality)
 
 
-async def progress_callback(current, total, msg, start_time, bot_name):
-    """Callback for Pyrogram upload progress."""
+def progress_callback(current, total, msg, start_time, bot_name, loop):
+    """Thread-safe callback for Pyrogram upload progress."""
+    if not total:
+        return
+
     now = time.time()
     diff = now - start_time
     if diff < 1:
@@ -292,7 +296,8 @@ async def progress_callback(current, total, msg, start_time, bot_name):
     )
 
     try:
-        await msg.edit_text(text, parse_mode="HTML")
+        coro = msg.edit_text(text, parse_mode="HTML")
+        asyncio.run_coroutine_threadsafe(coro, loop)
     except Exception:
         pass
 
@@ -387,8 +392,31 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
             f"<b>{to_small_caps('Quality')}:</b> {to_small_caps(quality)}"
         )
 
+        file_size = os.path.getsize(filepath)
+        use_fast_upload = mtype == "v" and file_size >= _FAST_UPLOAD_DOCUMENT_THRESHOLD_BYTES
+        if use_fast_upload:
+            caption += (
+                f"\n{get_etag('⚡')} <b>{to_small_caps('Mode')}:</b> "
+                f"{to_small_caps('Fast File Upload')}"
+            )
+        caption += (
+            f"\n{get_etag('📦')} <b>{to_small_caps('Size')}:</b> "
+            f"{format_bytes(file_size)}"
+        )
+
         start_time = time.time()
-        args = (prog_msg, start_time, BOT_NAME)
+        args = (prog_msg, start_time, BOT_NAME, loop)
+
+        upload_text = (
+            f"{get_etag('⚡')} <b>{to_small_caps('Fast Upload Mode')}</b>\n"
+            f"{get_etag('📦')} <b>{to_small_caps('Large File')}</b>: "
+            f"{format_bytes(file_size)}\n"
+            f"{get_etag('📁')} <b>{to_small_caps('Sending as file for faster delivery')}</b>"
+            if use_fast_upload
+            else f"{get_etag('📤')} <b>{to_small_caps('Uploading...')}</b>"
+        )
+
+        await prog_msg.edit_text(upload_text, parse_mode="HTML")
 
         try:
             if mtype == "a":
@@ -403,6 +431,14 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
                 await pyro_app.send_photo(
                     user_id,
                     filepath,
+                    caption=caption,
+                    progress=progress_callback,
+                    progress_args=args,
+                )
+            elif use_fast_upload:
+                await pyro_app.send_document(
+                    chat_id=user_id,
+                    document=filepath,
                     caption=caption,
                     progress=progress_callback,
                     progress_args=args,

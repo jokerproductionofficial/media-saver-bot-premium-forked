@@ -23,6 +23,9 @@ FORCE_JOIN_ENABLED: bool = os.getenv("FORCE_JOIN_ENABLED", "false").lower() == "
 DAILY_LIMIT: int = int(os.getenv("DAILY_LIMIT", "10"))
 RATE_LIMIT_SECONDS: int = int(os.getenv("RATE_LIMIT_SECONDS", "10"))
 MAX_FILE_SIZE_MB: int = int(os.getenv("MAX_FILE_SIZE_MB", "2000"))
+FAST_UPLOAD_DOCUMENT_THRESHOLD_MB: int = int(
+    os.getenv("FAST_UPLOAD_DOCUMENT_THRESHOLD_MB", "150")
+)
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
 DOWNLOAD_DIR: str = os.getenv("DOWNLOAD_DIR", "downloads")
