@@ -40,12 +40,9 @@ def get_ytdl_opts(platform: str = "generic") -> Dict:
         "no_color": True,
         "no_playlist": True,
         "extract_flat": False,
-        "format": "bestvideo+bestaudio/best",
-        "socket_timeout": 30,
-        "retries": 3,
     }
 
-    # Verified headers to avoid bot blocks
+    # Verified headers
     opts["headers"] = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
@@ -116,6 +113,7 @@ async def fetch_info(url: str) -> Dict:
         is_image = True if not is_video else False
 
     # Assign final media types
+    info['media_types'] = []
     if is_video: info['media_types'].append('video')
     if is_audio: info['media_types'].append('audio')
     if is_image: info['media_types'].append('image')
@@ -123,6 +121,7 @@ async def fetch_info(url: str) -> Dict:
     # Ensure at least one type
     if not info['media_types']:
         info['media_types'] = ['video']
+        if platform == 'youtube': info['media_types'].append('audio')
 
     # Extract unique heights
     formats = info_dict.get('formats', [])
