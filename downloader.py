@@ -203,15 +203,13 @@ async def download_media(url: str, platform: str, user_id: int, quality: str = "
     if progress_hook:
         opts["progress_hooks"] = [progress_hook]
 
-    # Post-processors for streamability
-    opts["postprocessors"] = opts.get("postprocessors", [])
-    opts["postprocessors"].append({
-        'key': 'FFmpegVideoConvertor',
-        'preferedformat': 'mp4',
-    })
+    # Ensure MP4 output for best compatibility
+    opts["merge_output_format"] = "mp4"
     
-    # Passing faststart to ffmpeg via postprocessor args
-    opts["postprocessor_args"] = ["-movflags", "+faststart"]
+    # Passing faststart to ffmpeg for streamability
+    opts["postprocessor_args"] = {
+        "ffmpeg": ["-movflags", "+faststart"]
+    }
 
     loop = asyncio.get_event_loop()
     with yt_dlp.YoutubeDL(opts) as ydl:
