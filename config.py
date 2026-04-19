@@ -158,15 +158,34 @@ def _write_cookie_file(path: str, content: str) -> bool:
     return True
 
 
+def _has_cookie_file(path: str) -> bool:
+    if not path or not os.path.exists(path):
+        return False
+    try:
+        with open(path, "r", encoding="utf-8", errors="ignore") as handle:
+            first_chunk = handle.read(256).strip()
+        return bool(first_chunk)
+    except OSError:
+        return False
+
+
 def sync_cookie_files_from_env() -> dict:
-    result = {"youtube": False, "generic": False}
+    result = {"youtube": "none", "generic": "none"}
 
-    yt_content = _decode_cookie_payload(YT_COOKIES_CONTENT, YT_COOKIES_B64)
-    if yt_content:
-        result["youtube"] = _write_cookie_file(YT_COOKIES_FILE, yt_content)
+    if _has_cookie_file(YT_COOKIES_FILE):
+        result["youtube"] = "file"
+    else:
+        yt_content = _decode_cookie_payload(YT_COOKIES_CONTENT, YT_COOKIES_B64)
+        if yt_content:
+            _write_cookie_file(YT_COOKIES_FILE, yt_content)
+            result["youtube"] = "environment"
 
-    generic_content = _decode_cookie_payload(COOKIES_CONTENT, COOKIES_B64)
-    if generic_content:
-        result["generic"] = _write_cookie_file(COOKIES_FILE, generic_content)
+    if _has_cookie_file(COOKIES_FILE):
+        result["generic"] = "file"
+    else:
+        generic_content = _decode_cookie_payload(COOKIES_CONTENT, COOKIES_B64)
+        if generic_content:
+            _write_cookie_file(COOKIES_FILE, generic_content)
+            result["generic"] = "environment"
 
     return result
