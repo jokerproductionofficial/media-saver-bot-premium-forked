@@ -182,9 +182,9 @@ async def progress_callback(current, total, msg, start_time, bot_name):
     diff = now - start_time
     if diff < 1: return # Wait at least 1s for first update
     
-    # Throttle updates to ~3 seconds to stay safe
+    # Throttle updates to ~2 seconds for better feel
     last_update = getattr(msg, "_last_progress_update", 0)
-    if now - last_update < 3 and current < total:
+    if now - last_update < 2 and current < total:
         return
     msg._last_progress_update = now
 
@@ -259,26 +259,36 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
             filepath = await dl.download_media(info['url'], info['platform'], user_id, quality, download_hook)
         elif mtype == 'a':
             filepath = await dl.download_audio(info['url'], quality, user_id, download_hook)
-        elif mtype == 'i': # image
-            # For images, we can often just pick the best thumbnail if download_media fails
-            try:
-                filepath = await dl.download_media(info['url'], info['platform'], user_id, "best")
-            except Exception:
-                if info.get('thumbnail'):
-                    # Fallback to downloading thumbnail directly
-                    async with aiohttp.ClientSession() as session:
-                        async with session.get(info['thumbnail']) as resp:
-                            if resp.status == 200:
-                                ext = info['thumbnail'].split('.')[-1].split('?')[0]
-                                if len(ext) > 4: ext = 'jpg'
-                                filename = f"{user_id}_img_{int(asyncio.get_event_loop().time())}.{ext}"
-                                filepath = os.path.join(dl.DOWNLOAD_DIR, filename)
-                                with open(filepath, 'wb') as f:
-                                    f.write(await resp.read())
-                if not filepath: raise
+        elif mtype == 'i':
+            filepath = await dl.download_media(info['url'], info['platform'], user_id, "best", download_hook)
+        
+        if not filepath:
+            raise Exception("File could not be downloaded.")
+        
+        # Capture metadata for better Telegram display
+        results = {}
+        if isinstance(filepath, dict):
+            results = filepath
+            filepath = results.get('filepath')
 
         await prog_msg.edit_text(f"{get_etag('📤')} <b>{to_small_caps('Uploading...')}</b>", parse_mode="HTML")
         
+        # Download thumbnail if available for "Direct Video" view
+        thumb_path = None
+        thumb_url = results.get('thumbnail') or info.get('thumbnail')
+        if thumb_url:
+            try:
+                thumb_name = f"thumb_{user_id}_{int(time.time())}.jpg"
+                thumb_path = os.path.join(dl.DOWNLOAD_DIR, thumb_name)
+                async with aiohttp.ClientSession() as session:
+                    async with session.get(thumb_url) as resp:
+                        if resp.status == 200:
+                            content = await resp.read()
+                            with open(thumb_path, 'wb') as f:
+                                f.write(content)
+            except Exception:
+                thumb_path = None
+
         caption = (
             f"{get_etag('✅')} <b>{to_small_caps(info['title'][:50])}</b>\n"
             f"{get_etag(_PLATFORM_EMOJI.get(info['platform'], '🌐'))} <b>{to_small_caps('Platform')}:</b> {to_small_caps(info['platform'])}\n"
@@ -289,12 +299,27 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
         start_time = time.time()
         args = (prog_msg, start_time, BOT_NAME)
 
-        if mtype == 'a':
-            await pyro_app.send_audio(user_id, filepath, caption=caption, progress=progress_callback, progress_args=args)
-        elif mtype == 'i':
-            await pyro_app.send_photo(user_id, filepath, caption=caption, progress=progress_callback, progress_args=args)
-        else:
-            await pyro_app.send_video(user_id, filepath, caption=caption, supports_streaming=True, progress=progress_callback, progress_args=args)
+        try:
+            if mtype == 'a':
+                await pyro_app.send_audio(user_id, filepath, caption=caption, progress=progress_callback, progress_args=args)
+            elif mtype == 'i':
+                await pyro_app.send_photo(user_id, filepath, caption=caption, progress=progress_callback, progress_args=args)
+            else:
+                # Provide rich metadata for direct streamable video
+                await pyro_app.send_video(
+                    chat_id=user_id,
+                    video=filepath,
+                    caption=caption,
+                    duration=results.get('duration_raw') or 0,
+                    width=results.get('width') or 0,
+                    height=results.get('height') or 0,
+                    thumb=thumb_path,
+                    supports_streaming=True,
+                    progress=progress_callback,
+                    progress_args=args
+                )
+        finally:
+            if thumb_path: dl.cleanup_file(thumb_path)
 
         db.increment_daily_usage(user_id)
         db.increment_total_downloads(user_id)

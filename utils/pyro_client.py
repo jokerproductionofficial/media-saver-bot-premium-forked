@@ -13,7 +13,9 @@ pyro_app = Client(
     api_id=API_ID,
     api_hash=API_HASH,
     bot_token=BOT_TOKEN,
-    in_memory=True # Avoid creating .session file on disk in Railway
+    in_memory=True, # Avoid creating .session file on disk in Railway
+    workers=50,      # Handle more concurrent uploads
+    sleep_threshold=60 # Avoid disconnects
 )
 
 async def start_pyro():

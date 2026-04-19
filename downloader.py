@@ -135,6 +135,11 @@ async def fetch_info(url: str) -> Dict:
     formats = info_dict.get('formats', [])
     info['available_qualities'] = _extract_available_resolutions(formats)
     
+    # Extract metadata properties
+    info['duration_raw'] = info_dict.get('duration', 0)
+    info['width'] = info_dict.get('width')
+    info['height'] = info_dict.get('height')
+    
     return info
 
 def _format_duration(seconds) -> str:
@@ -198,6 +203,16 @@ async def download_media(url: str, platform: str, user_id: int, quality: str = "
     if progress_hook:
         opts["progress_hooks"] = [progress_hook]
 
+    # Post-processors for streamability
+    opts["postprocessors"] = opts.get("postprocessors", [])
+    opts["postprocessors"].append({
+        'key': 'FFmpegVideoConvertor',
+        'preferedformat': 'mp4',
+    })
+    
+    # Passing faststart to ffmpeg via postprocessor args
+    opts["postprocessor_args"] = ["-movflags", "+faststart"]
+
     loop = asyncio.get_event_loop()
     with yt_dlp.YoutubeDL(opts) as ydl:
         # Check size before downloading if possible
@@ -209,11 +224,22 @@ async def download_media(url: str, platform: str, user_id: int, quality: str = "
         await loop.run_in_executor(None, lambda: ydl.download([url]))
 
     # Find the actual file (yt-dlp adds extension)
+    filepath = None
     for f in os.listdir(DOWNLOAD_DIR):
         if f.startswith(filename):
-            return os.path.join(DOWNLOAD_DIR, f)
+            filepath = os.path.join(DOWNLOAD_DIR, f)
+            break
     
-    raise Exception("Download failed: File not found after download.")
+    if not filepath:
+        raise Exception("Download failed: File not found after download.")
+
+    return {
+        'filepath': filepath,
+        'duration': info.get('duration', 0),
+        'width': info.get('width'),
+        'height': info.get('height'),
+        'thumbnail': info.get('thumbnail')
+    }
 
 async def download_audio(url: str, quality: str, user_id: int, progress_hook: Callable = None) -> str:
     platform = detect_platform(url)
