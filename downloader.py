@@ -78,36 +78,13 @@ def get_ytdl_opts(platform: str = "generic") -> Dict:
 
 async def fetch_info(url: str) -> Dict:
     platform = detect_platform(url)
-    loop = asyncio.get_event_loop()
-
     info_dict = None
     last_error = None
-    extract_attempts = [False, True] if platform == "youtube" and _get_cookie_file(platform) else [True]
-    for use_cookies in extract_attempts:
-        opts = get_ytdl_opts(platform)
-        opts.pop("format", None)
-        opts["ignoreerrors"] = False
-        if not use_cookies:
-            opts.pop("cookiefile", None)
 
-        try:
-            with yt_dlp.YoutubeDL(opts) as ydl:
-                # Skip post-processing the format selection entirely so we can
-                # read title/thumbnail/views even when a playable format fails.
-                info_dict = await loop.run_in_executor(
-                    None,
-                    lambda: ydl.extract_info(url, download=False, process=False),
-                )
-            if info_dict:
-                break
-        except Exception as e:
-            last_error = e
-            logger.warning(
-                "Metadata attempt failed for %s (cookies=%s): %s",
-                url,
-                use_cookies,
-                e,
-            )
+    try:
+        info_dict = await _extract_raw_info(url, platform, process=False)
+    except Exception as e:
+        last_error = e
 
     if not info_dict:
         logger.warning("yt-dlp failed, trying fallback for %s: %s", url, last_error)
@@ -178,6 +155,158 @@ def _format_duration(seconds) -> str:
         return "N/A"
 
 
+def _get_filesize(fmt: Dict) -> int:
+    return fmt.get("filesize") or fmt.get("filesize_approx") or 0
+
+
+def _quality_to_height(label: str) -> Optional[int]:
+    if label == "best":
+        return None
+    if label == "4K":
+        return 2160
+    if label == "8K":
+        return 4320
+    if label.endswith("p"):
+        try:
+            return int(label[:-1])
+        except ValueError:
+            return None
+    return None
+
+
+def _height_to_quality(height: int) -> str:
+    if height >= 2000:
+        return "4K"
+    if height >= 1400:
+        return "1440p"
+    return f"{height}p"
+
+
+def _height_matches_quality(height: int, target_height: int) -> bool:
+    if target_height == 2160:
+        return height >= 2000
+    if target_height == 1440:
+        return 1400 <= height < 2000
+    return abs(height - target_height) <= 20
+
+
+def _is_audio_only(fmt: Dict) -> bool:
+    return fmt.get("acodec") not in (None, "none") and fmt.get("vcodec") in (None, "none")
+
+
+def _is_video_only(fmt: Dict) -> bool:
+    return fmt.get("vcodec") not in (None, "none") and fmt.get("acodec") in (None, "none")
+
+
+def _is_muxed_video(fmt: Dict) -> bool:
+    return fmt.get("vcodec") not in (None, "none") and fmt.get("acodec") not in (None, "none")
+
+
+def _sort_audio_formats(formats: List[Dict], preferred_exts: Optional[List[str]] = None) -> List[Dict]:
+    preferred_exts = preferred_exts or []
+
+    def sort_key(fmt: Dict):
+        ext = fmt.get("ext")
+        if ext in preferred_exts:
+            ext_rank = preferred_exts.index(ext)
+        elif ext in {"m4a", "mp4"}:
+            ext_rank = len(preferred_exts)
+        elif ext == "webm":
+            ext_rank = len(preferred_exts) + 1
+        else:
+            ext_rank = len(preferred_exts) + 2
+
+        size = _get_filesize(fmt)
+        abr = -(fmt.get("abr") or 0)
+        return (ext_rank, 0 if size else 1, size if size else float("inf"), abr)
+
+    return sorted(formats, key=sort_key)
+
+
+def _sort_video_formats(formats: List[Dict]) -> List[Dict]:
+    def sort_key(fmt: Dict):
+        ext = fmt.get("ext")
+        if ext == "mp4":
+            ext_rank = 0
+        elif ext == "webm":
+            ext_rank = 1
+        else:
+            ext_rank = 2
+
+        size = _get_filesize(fmt)
+        fps = -(fmt.get("fps") or 0)
+        return (ext_rank, 0 if size else 1, size if size else float("inf"), fps)
+
+    return sorted(formats, key=sort_key)
+
+
+def _build_exact_video_format_candidates(
+    formats: List[Dict],
+    quality: str,
+    *,
+    allow_lower: bool,
+) -> List[str]:
+    target_height = _quality_to_height(quality)
+    if target_height is None:
+        return []
+
+    size_limit = MAX_FILE_SIZE_MB * 1024 * 1024
+    selectors: List[str] = []
+    seen = set()
+
+    audio_formats = [fmt for fmt in formats if _is_audio_only(fmt)]
+    mp4_audio_formats = _sort_audio_formats(audio_formats, preferred_exts=["m4a", "mp4"])
+    webm_audio_formats = _sort_audio_formats(audio_formats, preferred_exts=["webm"])
+
+    exact_heights = sorted(
+        {
+            fmt.get("height")
+            for fmt in formats
+            if fmt.get("height") and fmt.get("height") <= target_height
+        },
+        reverse=True,
+    )
+    if not allow_lower:
+        exact_heights = [
+            height for height in exact_heights if _height_matches_quality(height, target_height)
+        ]
+
+    for height in exact_heights:
+        height_formats = [fmt for fmt in formats if fmt.get("height") == height]
+        video_only_formats = _sort_video_formats([fmt for fmt in height_formats if _is_video_only(fmt)])
+
+        for video_fmt in video_only_formats:
+            video_size = _get_filesize(video_fmt)
+            preferred_audio = mp4_audio_formats if video_fmt.get("ext") == "mp4" else webm_audio_formats
+            if not preferred_audio:
+                preferred_audio = _sort_audio_formats(audio_formats)
+
+            for audio_fmt in preferred_audio:
+                audio_size = _get_filesize(audio_fmt)
+                total_size = video_size + audio_size if video_size and audio_size else 0
+                if total_size and total_size > size_limit:
+                    continue
+
+                selector = f"{video_fmt['format_id']}+{audio_fmt['format_id']}"
+                if selector not in seen:
+                    seen.add(selector)
+                    selectors.append(selector)
+                break
+
+        muxed_formats = _sort_video_formats([fmt for fmt in height_formats if _is_muxed_video(fmt)])
+        for muxed_fmt in muxed_formats:
+            muxed_size = _get_filesize(muxed_fmt)
+            if muxed_size and muxed_size > size_limit:
+                continue
+
+            selector = str(muxed_fmt["format_id"])
+            if selector not in seen:
+                seen.add(selector)
+                selectors.append(selector)
+
+    return selectors
+
+
 def _extract_available_resolutions(formats: List[Dict]) -> List[str]:
     heights = set()
     for fmt in formats:
@@ -196,14 +325,19 @@ def _extract_available_resolutions(formats: List[Dict]) -> List[str]:
 
     available = []
     for height in sorted(heights, reverse=True):
-        if height >= 2160:
-            label = "4K"
-        elif height >= 1440:
-            label = "1440p"
-        else:
-            label = f"{height}p"
-        if label not in available:
+        label = _height_to_quality(height)
+        if label not in available and _build_exact_video_format_candidates(
+            formats, label, allow_lower=False
+        ):
             available.append(label)
+
+    if not available:
+        fallback = []
+        for height in sorted(heights, reverse=True):
+            label = _height_to_quality(height)
+            if label not in fallback:
+                fallback.append(label)
+        return fallback or ["360p", "720p"]
 
     return available
 
@@ -211,8 +345,8 @@ def _extract_available_resolutions(formats: List[Dict]) -> List[str]:
 def _build_video_format_candidates(quality: str) -> List[str]:
     if quality == "best":
         return [
-            "best[ext=mp4]/best",
             "bestvideo+bestaudio/best",
+            "best[ext=mp4]/best",
             "best",
             "bv*+ba/b",
         ]
@@ -220,12 +354,14 @@ def _build_video_format_candidates(quality: str) -> List[str]:
     if quality.endswith("p") or quality in ["4K", "8K"]:
         height = 2160 if quality == "4K" else 4320 if quality == "8K" else int(quality[:-1])
         return [
-            f"best[ext=mp4][height<={height}]",
-            f"best[height<={height}]",
-            "18",
+            f"bestvideo[height={height}]+bestaudio/bestvideo[height={height}]+bestaudio",
+            f"bv*[height={height}]+ba/b[height={height}]",
             f"bestvideo[height<={height}]+bestaudio/best[height<={height}]",
-            "bestvideo+bestaudio/best",
             f"bv*[height<={height}]+ba/b[height<={height}]",
+            f"best[height={height}]",
+            f"best[height<={height}]",
+            "bestvideo+bestaudio/best",
+            "18",
             "best",
             "bv*+ba/b",
         ]
@@ -268,6 +404,41 @@ def _iter_download_attempt_opts(platform: str, format_candidates: List[str]) -> 
     return attempts
 
 
+async def _extract_raw_info(url: str, platform: str, *, process: bool) -> Dict:
+    loop = asyncio.get_running_loop()
+    info_dict = None
+    last_error = None
+    extract_attempts = [False, True] if platform == "youtube" and _get_cookie_file(platform) else [True]
+
+    for use_cookies in extract_attempts:
+        opts = get_ytdl_opts(platform)
+        opts.pop("format", None)
+        opts["ignoreerrors"] = False
+        if not use_cookies:
+            opts.pop("cookiefile", None)
+
+        try:
+            with yt_dlp.YoutubeDL(opts) as ydl:
+                info_dict = await loop.run_in_executor(
+                    None,
+                    lambda: ydl.extract_info(url, download=False, process=process),
+                )
+            if info_dict:
+                return info_dict
+        except Exception as e:
+            last_error = e
+            logger.warning(
+                "Metadata attempt failed for %s (cookies=%s): %s",
+                url,
+                use_cookies,
+                e,
+            )
+
+    if last_error:
+        raise last_error
+    raise ValueError("yt-dlp returned no metadata.")
+
+
 async def download_media(
     url: str,
     platform: str,
@@ -281,9 +452,24 @@ async def download_media(
     loop = asyncio.get_event_loop()
     info = None
     last_error = None
+    format_candidates = _build_video_format_candidates(quality)
+
+    try:
+        raw_info = await _extract_raw_info(url, platform, process=False)
+        exact_candidates = _build_exact_video_format_candidates(
+            raw_info.get("formats", []),
+            quality,
+            allow_lower=True,
+        )
+        if exact_candidates:
+            format_candidates = exact_candidates + [
+                candidate for candidate in format_candidates if candidate not in exact_candidates
+            ]
+    except Exception as e:
+        logger.warning("Could not pre-resolve formats for %s: %s", url, e)
 
     for attempt_number, opts in enumerate(
-        _iter_download_attempt_opts(platform, _build_video_format_candidates(quality)),
+        _iter_download_attempt_opts(platform, format_candidates),
         start=1,
     ):
         opts["outtmpl"] = outtmpl

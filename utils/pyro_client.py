@@ -1,5 +1,6 @@
 """utils/pyro_client.py — Pyrogram client for MTProto 2GB uploads."""
 
+import asyncio
 import logging
 from pyrogram import Client
 from config import API_ID, API_HASH, BOT_TOKEN
@@ -24,7 +25,9 @@ async def start_pyro():
         return False
     
     try:
+        pyro_app.loop = asyncio.get_running_loop()
         await pyro_app.start()
+        pyro_app.loop = asyncio.get_running_loop()
         logger.info("✅ Pyrogram (MTProto) started for 2GB support.")
         return True
     except Exception as e:

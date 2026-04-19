@@ -417,6 +417,7 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
         )
 
         await prog_msg.edit_text(upload_text, parse_mode="HTML")
+        pyro_app.loop = loop
 
         try:
             if mtype == "a":
