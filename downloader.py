@@ -100,6 +100,16 @@ async def fetch_info(url: str) -> Dict:
         if platform == "youtube"
         else {}
     )
+    available_qualities = list(quality_candidates) or _extract_available_resolutions(
+        formats,
+        duration=duration_raw,
+    )
+
+    if platform == "youtube" and not available_qualities:
+        raise ValueError(
+            "YouTube formats are blocked for this video. Refresh yt_cookies.txt and try again."
+        )
+
     info = {
         "id": info_dict.get("id"),
         "title": info_dict.get("title", "Unknown Title"),
@@ -112,8 +122,7 @@ async def fetch_info(url: str) -> Dict:
         "view_count": info_dict.get("view_count"),
         "is_youtube": platform == "youtube",
         "media_types": [],
-        "available_qualities": list(quality_candidates)
-        or _extract_available_resolutions(formats, duration=duration_raw),
+        "available_qualities": available_qualities,
         "quality_candidates": quality_candidates,
     }
 
@@ -218,6 +227,15 @@ def _height_matches_quality(height: int, target_height: int) -> bool:
 
 def _is_audio_only(fmt: Dict) -> bool:
     return fmt.get("acodec") not in (None, "none") and fmt.get("vcodec") in (None, "none")
+
+
+def _is_downloadable_video_format(fmt: Dict) -> bool:
+    format_id = str(fmt.get("format_id") or "")
+    if format_id.startswith("sb"):
+        return False
+    if fmt.get("ext") == "mhtml":
+        return False
+    return fmt.get("vcodec") not in (None, "none")
 
 
 def _is_video_only(fmt: Dict) -> bool:
@@ -380,17 +398,17 @@ def _extract_available_resolutions(
     heights = {
         fmt.get("height")
         for fmt in formats
-        if fmt.get("height") and fmt.get("height") >= 144
+        if fmt.get("height") and fmt.get("height") >= 144 and _is_downloadable_video_format(fmt)
     }
     if not heights:
-        return ["360p", "720p"]
+        return []
 
     fallback = []
     for height in sorted(heights, reverse=True):
         label = _height_to_quality(height)
         if label not in fallback:
             fallback.append(label)
-    return fallback or ["360p", "720p"]
+    return fallback
 
 
 def _score_youtube_formats(
@@ -552,6 +570,11 @@ async def download_media(
         logger.warning("Could not pre-resolve formats for %s: %s", url, e)
 
     format_candidates.extend(preferred_formats or [])
+
+    if platform == "youtube" and quality != "best" and not format_candidates:
+        raise ValueError(
+            "YouTube formats are blocked for this video. Refresh yt_cookies.txt and try again."
+        )
 
     fallback_candidates = _build_video_format_candidates(quality)
     for candidate in fallback_candidates:
