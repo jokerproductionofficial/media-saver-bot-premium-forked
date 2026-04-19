@@ -94,7 +94,12 @@ async def fetch_info(url: str) -> Dict:
         return await _fetch_fallback_info(url, platform)
 
     formats = info_dict.get("formats", [])
-    quality_candidates = _build_quality_candidate_map(formats) if platform == "youtube" else {}
+    duration_raw = info_dict.get("duration", 0)
+    quality_candidates = (
+        _build_quality_candidate_map(formats, duration=duration_raw)
+        if platform == "youtube"
+        else {}
+    )
     info = {
         "id": info_dict.get("id"),
         "title": info_dict.get("title", "Unknown Title"),
@@ -107,7 +112,8 @@ async def fetch_info(url: str) -> Dict:
         "view_count": info_dict.get("view_count"),
         "is_youtube": platform == "youtube",
         "media_types": [],
-        "available_qualities": list(quality_candidates) or _extract_available_resolutions(formats),
+        "available_qualities": list(quality_candidates)
+        or _extract_available_resolutions(formats, duration=duration_raw),
         "quality_candidates": quality_candidates,
     }
 
@@ -139,7 +145,7 @@ async def fetch_info(url: str) -> Dict:
         if not info["media_types"]:
             info["media_types"] = ["video"]
 
-    info["duration_raw"] = info_dict.get("duration", 0)
+    info["duration_raw"] = duration_raw
     info["width"] = info_dict.get("width")
     info["height"] = info_dict.get("height")
 
@@ -162,6 +168,21 @@ def _format_duration(seconds) -> str:
 
 def _get_filesize(fmt: Dict) -> int:
     return fmt.get("filesize") or fmt.get("filesize_approx") or 0
+
+
+def _estimate_filesize(fmt: Dict, duration: Optional[float] = None) -> int:
+    size = _get_filesize(fmt)
+    if size:
+        return size
+
+    tbr = fmt.get("tbr")
+    if not tbr or not duration:
+        return 0
+
+    try:
+        return int((float(tbr) * 1000 / 8) * float(duration))
+    except (TypeError, ValueError):
+        return 0
 
 
 def _quality_to_height(label: str) -> Optional[int]:
@@ -221,9 +242,10 @@ def _sort_audio_formats(formats: List[Dict], preferred_exts: Optional[List[str]]
         else:
             ext_rank = len(preferred_exts) + 2
 
-        size = _get_filesize(fmt)
         abr = -(fmt.get("abr") or 0)
-        return (ext_rank, 0 if size else 1, size if size else float("inf"), abr)
+        asr = -(fmt.get("asr") or 0)
+        size = -(_get_filesize(fmt) or 0)
+        return (ext_rank, abr, asr, size)
 
     return sorted(formats, key=sort_key)
 
@@ -238,9 +260,10 @@ def _sort_video_formats(formats: List[Dict]) -> List[Dict]:
         else:
             ext_rank = 2
 
-        size = _get_filesize(fmt)
+        size = -(_get_filesize(fmt) or 0)
         fps = -(fmt.get("fps") or 0)
-        return (ext_rank, 0 if size else 1, size if size else float("inf"), fps)
+        height = -(fmt.get("height") or 0)
+        return (ext_rank, fps, height, size)
 
     return sorted(formats, key=sort_key)
 
@@ -250,6 +273,7 @@ def _build_exact_video_format_candidates(
     quality: str,
     *,
     allow_lower: bool,
+    duration: Optional[float] = None,
 ) -> List[str]:
     target_height = _quality_to_height(quality)
     if target_height is None:
@@ -281,13 +305,14 @@ def _build_exact_video_format_candidates(
         video_only_formats = _sort_video_formats([fmt for fmt in height_formats if _is_video_only(fmt)])
 
         for video_fmt in video_only_formats:
-            video_size = _get_filesize(video_fmt)
+            video_size = _estimate_filesize(video_fmt, duration)
             preferred_audio = mp4_audio_formats if video_fmt.get("ext") == "mp4" else webm_audio_formats
             if not preferred_audio:
                 preferred_audio = _sort_audio_formats(audio_formats)
 
+            selectors_added = 0
             for audio_fmt in preferred_audio:
-                audio_size = _get_filesize(audio_fmt)
+                audio_size = _estimate_filesize(audio_fmt, duration)
                 total_size = video_size + audio_size if video_size and audio_size else 0
                 if total_size and total_size > size_limit:
                     continue
@@ -296,11 +321,16 @@ def _build_exact_video_format_candidates(
                 if selector not in seen:
                     seen.add(selector)
                     selectors.append(selector)
-                break
+                    selectors_added += 1
+
+                # Some videos reject a specific companion audio track, so keep
+                # a few alternates instead of betting everything on one pair.
+                if selectors_added >= 3:
+                    break
 
         muxed_formats = _sort_video_formats([fmt for fmt in height_formats if _is_muxed_video(fmt)])
         for muxed_fmt in muxed_formats:
-            muxed_size = _get_filesize(muxed_fmt)
+            muxed_size = _estimate_filesize(muxed_fmt, duration)
             if muxed_size and muxed_size > size_limit:
                 continue
 
@@ -312,7 +342,10 @@ def _build_exact_video_format_candidates(
     return selectors
 
 
-def _build_quality_candidate_map(formats: List[Dict]) -> Dict[str, List[str]]:
+def _build_quality_candidate_map(
+    formats: List[Dict],
+    duration: Optional[float] = None,
+) -> Dict[str, List[str]]:
     quality_map: Dict[str, List[str]] = {}
     heights = sorted(
         {fmt.get("height") for fmt in formats if fmt.get("height") and fmt.get("height") >= 144},
@@ -324,15 +357,23 @@ def _build_quality_candidate_map(formats: List[Dict]) -> Dict[str, List[str]]:
         if label in quality_map:
             continue
 
-        selectors = _build_exact_video_format_candidates(formats, label, allow_lower=False)
+        selectors = _build_exact_video_format_candidates(
+            formats,
+            label,
+            allow_lower=False,
+            duration=duration,
+        )
         if selectors:
             quality_map[label] = selectors
 
     return quality_map
 
 
-def _extract_available_resolutions(formats: List[Dict]) -> List[str]:
-    quality_map = _build_quality_candidate_map(formats)
+def _extract_available_resolutions(
+    formats: List[Dict],
+    duration: Optional[float] = None,
+) -> List[str]:
+    quality_map = _build_quality_candidate_map(formats, duration=duration)
     if quality_map:
         return list(quality_map)
 
@@ -352,8 +393,11 @@ def _extract_available_resolutions(formats: List[Dict]) -> List[str]:
     return fallback or ["360p", "720p"]
 
 
-def _score_youtube_formats(formats: List[Dict]) -> tuple[int, int]:
-    quality_map = _build_quality_candidate_map(formats)
+def _score_youtube_formats(
+    formats: List[Dict],
+    duration: Optional[float] = None,
+) -> tuple[int, int]:
+    quality_map = _build_quality_candidate_map(formats, duration=duration)
     return (len(quality_map), len(formats))
 
 
@@ -368,15 +412,14 @@ def _build_video_format_candidates(quality: str) -> List[str]:
 
     if quality.endswith("p") or quality in ["4K", "8K"]:
         height = 2160 if quality == "4K" else 4320 if quality == "8K" else int(quality[:-1])
-        return [
+        candidates = [
             f"best[height<={height}][ext=mp4]/best[height<={height}]",
             f"bestvideo[height<={height}]+bestaudio/best[height<={height}]",
             f"bv*[height<={height}]+ba/b[height<={height}]",
-            "bestvideo+bestaudio/best",
-            "18",
-            "best",
-            "bv*+ba/b",
         ]
+        if height >= 360:
+            candidates.append("18")
+        return candidates
 
     return [
         "best[ext=mp4]/best",
@@ -468,34 +511,12 @@ async def _extract_raw_info(
 
 
 async def _extract_youtube_info(url: str) -> Dict:
-    best_info = None
-    best_score = (-1, -1)
-    last_error = None
-
-    for process in (True, False):
-        try:
-            candidate = await _extract_raw_info(
-                url,
-                "youtube",
-                process=process,
-                prefer_cookies=True,
-            )
-            score = _score_youtube_formats(candidate.get("formats", []))
-            if score > best_score:
-                best_info = candidate
-                best_score = score
-
-            # Stop early once we have a manifest rich enough to build
-            # a stable quality selector.
-            if score[0] >= 4:
-                break
-        except Exception as e:
-            last_error = e
-
-    if best_info:
-        return best_info
-
-    raise last_error or ValueError("yt-dlp returned no YouTube metadata.")
+    return await _extract_raw_info(
+        url,
+        "youtube",
+        process=False,
+        prefer_cookies=True,
+    )
 
 
 async def download_media(
@@ -512,28 +533,30 @@ async def download_media(
     loop = asyncio.get_event_loop()
     info = None
     last_error = None
-    format_candidates = list(preferred_formats or [])
+    format_candidates: List[str] = []
 
-    if not format_candidates:
-        try:
-            if platform == "youtube":
-                raw_info = await _extract_youtube_info(url)
-            else:
-                raw_info = await _extract_raw_info(url, platform, process=False)
-            exact_candidates = _build_exact_video_format_candidates(
-                raw_info.get("formats", []),
-                quality,
-                allow_lower=True,
-            )
-            if exact_candidates:
-                format_candidates.extend(exact_candidates)
-        except Exception as e:
-            logger.warning("Could not pre-resolve formats for %s: %s", url, e)
+    try:
+        if platform == "youtube":
+            raw_info = await _extract_youtube_info(url)
+        else:
+            raw_info = await _extract_raw_info(url, platform, process=False)
+
+        exact_candidates = _build_exact_video_format_candidates(
+            raw_info.get("formats", []),
+            quality,
+            allow_lower=True,
+            duration=raw_info.get("duration"),
+        )
+        format_candidates.extend(exact_candidates)
+    except Exception as e:
+        logger.warning("Could not pre-resolve formats for %s: %s", url, e)
+
+    format_candidates.extend(preferred_formats or [])
 
     fallback_candidates = _build_video_format_candidates(quality)
-    format_candidates.extend(
-        candidate for candidate in fallback_candidates if candidate not in format_candidates
-    )
+    for candidate in fallback_candidates:
+        if candidate not in format_candidates:
+            format_candidates.append(candidate)
 
     for attempt_number, opts in enumerate(
         _iter_download_attempt_opts(platform, format_candidates),
