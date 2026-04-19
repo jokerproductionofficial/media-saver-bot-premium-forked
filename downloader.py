@@ -48,6 +48,7 @@ def get_ytdl_opts(platform: str = "generic") -> Dict:
     opts = {
         "quiet": True,
         "no_warnings": True,
+        "ignoreconfig": True,
         "nocheckcertificate": True,
         "ignoreerrors": True,
         "logtostderr": False,
@@ -77,20 +78,40 @@ def get_ytdl_opts(platform: str = "generic") -> Dict:
 
 async def fetch_info(url: str) -> Dict:
     platform = detect_platform(url)
-    opts = get_ytdl_opts(platform)
-    opts.pop("format", None)
-    opts["ignoreerrors"] = False
-
     loop = asyncio.get_event_loop()
-    try:
-        with yt_dlp.YoutubeDL(opts) as ydl:
-            info_dict = await loop.run_in_executor(None, lambda: ydl.extract_info(url, download=False))
-    except Exception as e:
-        logger.warning("yt-dlp failed, trying fallback for %s: %s", url, e)
-        return await _fetch_fallback_info(url, platform)
+
+    info_dict = None
+    last_error = None
+    extract_attempts = [False, True] if platform == "youtube" and _get_cookie_file(platform) else [True]
+    for use_cookies in extract_attempts:
+        opts = get_ytdl_opts(platform)
+        opts.pop("format", None)
+        opts["ignoreerrors"] = False
+        if not use_cookies:
+            opts.pop("cookiefile", None)
+
+        try:
+            with yt_dlp.YoutubeDL(opts) as ydl:
+                # Skip post-processing the format selection entirely so we can
+                # read title/thumbnail/views even when a playable format fails.
+                info_dict = await loop.run_in_executor(
+                    None,
+                    lambda: ydl.extract_info(url, download=False, process=False),
+                )
+            if info_dict:
+                break
+        except Exception as e:
+            last_error = e
+            logger.warning(
+                "Metadata attempt failed for %s (cookies=%s): %s",
+                url,
+                use_cookies,
+                e,
+            )
 
     if not info_dict:
-        raise ValueError("Could not extract any info from this URL.")
+        logger.warning("yt-dlp failed, trying fallback for %s: %s", url, last_error)
+        return await _fetch_fallback_info(url, platform)
 
     formats = info_dict.get("formats", [])
     info = {
@@ -190,26 +211,30 @@ def _extract_available_resolutions(formats: List[Dict]) -> List[str]:
 def _build_video_format_candidates(quality: str) -> List[str]:
     if quality == "best":
         return [
+            "best[ext=mp4]/best",
             "bestvideo+bestaudio/best",
-            "bv*+ba/b",
             "best",
+            "bv*+ba/b",
         ]
 
     if quality.endswith("p") or quality in ["4K", "8K"]:
         height = 2160 if quality == "4K" else 4320 if quality == "8K" else int(quality[:-1])
         return [
-            f"bestvideo[height<={height}]+bestaudio/best[height<={height}]",
-            f"bv*[height<={height}]+ba/b[height<={height}]",
+            f"best[ext=mp4][height<={height}]",
             f"best[height<={height}]",
+            "18",
+            f"bestvideo[height<={height}]+bestaudio/best[height<={height}]",
             "bestvideo+bestaudio/best",
-            "bv*+ba/b",
+            f"bv*[height<={height}]+ba/b[height<={height}]",
             "best",
+            "bv*+ba/b",
         ]
 
     return [
+        "best[ext=mp4]/best",
+        "best",
         "bestvideo+bestaudio/best",
         "bv*+ba/b",
-        "best",
     ]
 
 
@@ -226,7 +251,12 @@ def _iter_download_attempt_opts(platform: str, format_candidates: List[str]) -> 
     base_opts = get_ytdl_opts(platform)
     has_cookiefile = "cookiefile" in base_opts
 
-    for keep_cookies in ([True, False] if has_cookiefile else [True]):
+    if platform == "youtube" and has_cookiefile:
+        cookie_attempts = [False, True]
+    else:
+        cookie_attempts = [True, False] if has_cookiefile else [True]
+
+    for keep_cookies in cookie_attempts:
         for format_selector in format_candidates:
             attempt_opts = get_ytdl_opts(platform)
             attempt_opts["ignoreerrors"] = False
