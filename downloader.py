@@ -22,6 +22,7 @@ def detect_platform(url: str) -> Optional[str]:
     if 'twitter.com' in url or 'x.com' in url: return 'twitter'
     if 'pinterest.com' in url or 'pin.it' in url: return 'pinterest'
     if 'facebook.com' in url or 'fb.watch' in url: return 'facebook'
+    if 't.me' in url or 'telegram.me' in url: return 'telegram'
     return 'generic'
 
 def _get_cookie_file(platform: str) -> Optional[str]:
@@ -93,27 +94,42 @@ async def fetch_info(url: str) -> Dict:
     formats = info_dict.get('formats', [])
     info['available_qualities'] = _extract_available_resolutions(formats)
     
-    # Determine media types
+    # Determine media types logically
+    is_video = False
+    is_audio = False
+    is_image = False
+
+    # Check for video
+    # 1. Has specific resolutions
     if info['available_qualities'] and info['available_qualities'] != ["360p", "720p"]:
-        info['media_types'].append('video')
+        is_video = True
+    # 2. Has formats with vcodec != 'none'
+    elif any(f.get('vcodec') != 'none' for f in formats if f.get('vcodec')):
+        is_video = True
+    # 3. Known video-primary platform
+    elif platform in ['youtube', 'tiktok', 'instagram', 'facebook', 'telegram']:
+        is_video = True
     
     # Check for audio
-    if any(f.get('acodec') != 'none' for f in formats if f.get('ext') in ['mp3', 'm4a', 'wav']):
-        info['media_types'].append('audio')
+    if any(f.get('acodec') != 'none' for f in formats if f.get('ext') in ['mp3', 'm4a', 'wav', 'ogg']):
+        is_audio = True
     elif platform == 'youtube': # YouTube always has audio
-        info['media_types'].append('audio')
+        is_audio = True
 
-    # Check for images (Pinterest/Instagram)
-    if not info['media_types']:
-        if info_dict.get('ext') in ['jpg', 'jpeg', 'png', 'webp'] or info_dict.get('thumbnails'):
-            info['media_types'].append('image')
-    
-    # Fallback for Pinterest image-only
-    if platform == 'pinterest' and not info['media_types']:
-        info['media_types'].append('image')
+    # Check for image
+    if info_dict.get('ext') in ['jpg', 'jpeg', 'png', 'webp']:
+        is_image = True
+    elif not is_video and not is_audio and (info_dict.get('thumbnails') or platform == 'pinterest'):
+        is_image = True
 
+    # Assign final media types
+    if is_video: info['media_types'].append('video')
+    if is_audio: info['media_types'].append('audio')
+    if is_image: info['media_types'].append('image')
+
+    # Ensure at least one type
     if not info['media_types']:
-        info['media_types'] = ['video'] # Default fallback
+        info['media_types'] = ['video']
 
     # Extract unique heights
     formats = info_dict.get('formats', [])
@@ -254,6 +270,16 @@ async def _fetch_fallback_info(url: str, platform: str) -> Dict:
                     # Sometimes Pinterest has images in a different script tag or meta
                     pass 
 
+                # Improved detection for fallback
+                media_types = []
+                if image: media_types.append('image')
+                
+                # If it's a known video site, always allow video
+                if platform in ['youtube', 'tiktok', 'instagram', 'facebook', 'telegram'] or 'video' in html.lower():
+                    media_types.insert(0, 'video')
+                
+                if not media_types: media_types = ['video']
+
                 return {
                     'id': f"fallback_{int(asyncio.get_event_loop().time())}",
                     'title': title,
@@ -264,8 +290,8 @@ async def _fetch_fallback_info(url: str, platform: str) -> Dict:
                     'duration': "N/A",
                     'view_count': None,
                     'is_youtube': False,
-                    'media_types': ['image'] if image else ['video'],
-                    'available_qualities': []
+                    'media_types': media_types,
+                    'available_qualities': ["best"]
                 }
     except Exception as e:
         logger.error(f"Fallback extraction failed: {e}")
