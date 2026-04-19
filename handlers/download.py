@@ -15,9 +15,12 @@ import downloader as dl
 from config import AUDIO_QUALITIES
 from database import db
 from utils.helpers import (
-    get_eid, get_etag, guard_user, format_views, safe_edit, to_small_caps
+    get_eid, get_etag, guard_user, format_views, safe_edit, to_small_caps,
+    format_bytes, get_progress_bar
 )
 from utils.pyro_client import pyro_app
+from config import BOT_NAME
+import time
 
 logger = logging.getLogger(__name__)
 router = Router()
@@ -173,6 +176,39 @@ async def cb_start_download(query: types.CallbackQuery, bot: Bot):
     task = asyncio.create_task(_run_download(query, bot, info, mtype, quality, prog_msg))
     _active[user_id] = task
 
+async def progress_callback(current, total, msg, start_time, bot_name):
+    """Callback for Pyrogram upload progress."""
+    now = time.time()
+    diff = now - start_time
+    if diff < 1: return # Wait at least 1s for first update
+    
+    # Throttle updates to ~3 seconds to stay safe
+    last_update = getattr(msg, "_last_progress_update", 0)
+    if now - last_update < 3 and current < total:
+        return
+    msg._last_progress_update = now
+
+    percentage = current * 100 / total
+    speed = current / diff
+    
+    bar = get_progress_bar(current, total)
+    
+    text = (
+        f"<b>{bot_name} {to_small_caps('Upload Progress Bar')}</b> {get_etag('✅')}\n"
+        f"━━━━━━━━━━━━━━━━━\n"
+        f"<code>{bar}</code>\n"
+        f"<b>{to_small_caps('Percentage')}:</b> {percentage:.2f}%\n"
+        f"<b>{to_small_caps('Speed')}:</b> {format_bytes(speed)}/s\n"
+        f"<b>{to_small_caps('Status')}:</b> {format_bytes(current)} {to_small_caps('of')} {format_bytes(total)}\n"
+        f"━━━━━━━━━━━━━━━━━\n"
+        f"<b>{to_small_caps('Smooth Transfer → Activated')}</b> {get_etag('✅')}"
+    )
+    
+    try:
+        await msg.edit_text(text, parse_mode="HTML")
+    except Exception:
+        pass
+
 
 async def _run_download(query, bot, info, mtype, quality, prog_msg):
     user_id = query.from_user.id
@@ -210,14 +246,16 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
             f"<b>{to_small_caps('Quality')}:</b> {to_small_caps(quality)}"
         )
 
-        file = FSInputFile(filepath)
         # Use Pyrogram (MTProto) for sending to support up to 2GB
+        start_time = time.time()
+        args = (prog_msg, start_time, BOT_NAME)
+
         if mtype == 'a':
-            await pyro_app.send_audio(user_id, filepath, caption=caption)
+            await pyro_app.send_audio(user_id, filepath, caption=caption, progress=progress_callback, progress_args=args)
         elif mtype == 'i':
-            await pyro_app.send_photo(user_id, filepath, caption=caption)
+            await pyro_app.send_photo(user_id, filepath, caption=caption, progress=progress_callback, progress_args=args)
         else:
-            await pyro_app.send_video(user_id, filepath, caption=caption, supports_streaming=True)
+            await pyro_app.send_video(user_id, filepath, caption=caption, supports_streaming=True, progress=progress_callback, progress_args=args)
 
         db.increment_daily_usage(user_id)
         db.increment_total_downloads(user_id)

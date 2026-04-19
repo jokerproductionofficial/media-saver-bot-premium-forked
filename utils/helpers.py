@@ -175,3 +175,25 @@ def to_small_caps(text: str) -> str:
         return match.group(0).translate(trans)
         
     return re.sub(r'(?:^|>)[^<]+(?:<|$)', replace, text)
+
+# ═════════════════════════════════════════════════════════════════════════════
+#  UI & Progress
+# ═════════════════════════════════════════════════════════════════════════════
+
+def format_bytes(size: float) -> str:
+    """Format bytes into human readable format (KB, MB, GB)."""
+    if not size: return "0 B"
+    power = 2**10
+    n = 0
+    power_labels = {0 : '', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
+    while size > power:
+        size /= power
+        n += 1
+    return f"{size:.2f} {power_labels[n]}B"
+
+def get_progress_bar(current: int, total: int) -> str:
+    """Generate a visual progress bar using ASCII characters."""
+    percentage = (current / total) * 100
+    finished = int(percentage / 5) # 20 blocks total
+    bar = "▓" * finished + "░" * (20 - finished)
+    return bar
