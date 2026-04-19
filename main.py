@@ -13,6 +13,7 @@ from config import BOT_TOKEN, DOWNLOAD_DIR, LOG_FILE
 from database.db import init_db
 from downloader import cleanup_old_files
 from handlers import admin, download, start
+from utils.pyro_client import start_pyro, stop_pyro
 
 # Force UTF-8 for console output on Windows to prevent encoding errors
 if sys.platform == "win32":
@@ -77,7 +78,14 @@ async def main():
     
     logger.info("Starting Polling...")
     await bot.delete_webhook(drop_pending_updates=True)
-    await dp.start_polling(bot)
+    
+    # Start Pyrogram MTProto
+    await start_pyro()
+    
+    try:
+        await dp.start_polling(bot)
+    finally:
+        await stop_pyro()
 
 if __name__ == "__main__":
     try:

@@ -10,6 +10,10 @@ BOT_TOKEN: str = os.getenv("BOT_TOKEN", "")
 ADMIN_ID: int = int(os.getenv("ADMIN_ID", "5817712676"))
 ADMIN_USERNAME: str = os.getenv("ADMIN_USERNAME", "Talk_with_joker_bot")
 
+# ── MTProto (For 2GB Support) ────────────────────────────────────────────────
+API_ID: int = int(os.getenv("API_ID", "0"))
+API_HASH: str = os.getenv("API_HASH", "")
+
 # ── Force Join ────────────────────────────────────────────────────────────────
 CHANNEL_ID: str = os.getenv("CHANNEL_ID", "")
 CHANNEL_URL: str = os.getenv("CHANNEL_URL", "")

@@ -17,6 +17,7 @@ from database import db
 from utils.helpers import (
     get_eid, get_etag, guard_user, format_views, safe_edit, to_small_caps
 )
+from utils.pyro_client import pyro_app
 
 logger = logging.getLogger(__name__)
 router = Router()
@@ -210,12 +211,13 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
         )
 
         file = FSInputFile(filepath)
+        # Use Pyrogram (MTProto) for sending to support up to 2GB
         if mtype == 'a':
-            await bot.send_audio(user_id, file, caption=caption, parse_mode="HTML")
+            await pyro_app.send_audio(user_id, filepath, caption=caption)
         elif mtype == 'i':
-            await bot.send_photo(user_id, file, caption=caption, parse_mode="HTML")
+            await pyro_app.send_photo(user_id, filepath, caption=caption)
         else:
-            await bot.send_video(user_id, file, caption=caption, parse_mode="HTML", supports_streaming=True)
+            await pyro_app.send_video(user_id, filepath, caption=caption, supports_streaming=True)
 
         db.increment_daily_usage(user_id)
         db.increment_total_downloads(user_id)

@@ -5,3 +5,5 @@ aiohttp
 aiofiles
 certifi
 static-ffmpeg
+pyrogram
+tgcrypto
