@@ -51,44 +51,44 @@ async def handle_link(message: types.Message, bot: Bot):
         await status.edit_text(f"❌ <b>{to_small_caps('Error:')}</b> {to_small_caps(str(e)[:100])}", parse_mode="HTML")
         return
 
-    title = info['title']
+    title = info.get('title', 'Media')
+    if len(title) > 60: title = title[:57] + "..."
+    
     caption = (
         f"{get_etag(emoji)} <b>{to_small_caps(title)}</b>\n\n"
-        f"{get_etag('👤')} <b>{to_small_caps('Uploader:')}</b> {to_small_caps(info['uploader'])}\n"
+        f"{get_etag('👤')} <b>{to_small_caps('Uploader:')}</b> {to_small_caps(info.get('uploader', 'Unknown'))}\n"
+        f"{get_etag('👀')} <b>{to_small_caps('Views:')}</b> {format_views(info.get('view_count', 0))}\n"
+        f"{get_etag('🕐')} <b>{to_small_caps('Duration:')}</b> {info.get('duration_string', info.get('duration', 'N/A'))}\n\n"
+        f"{get_etag('👇')} <b>{to_small_caps('Choose Download Type:')}</b>"
     )
-    if info['duration'] != "N/A":
-        caption += f"{get_etag('🕐')} <b>{to_small_caps('Duration:')}</b> {info['duration']}\n"
-    if info['view_count']:
-        caption += f"{get_etag('👁')} <b>{to_small_caps('Views:')}</b> {format_views(info['view_count'])}\n"
-    
-    caption += f"\n{get_etag('👇')} <b>{to_small_caps('Choose download type:')}</b>"
 
     builder = InlineKeyboardBuilder()
     if "video" in info['media_types']:
-        if info['is_youtube']:
-            builder.row(InlineKeyboardButton(text=to_small_caps("Video"), callback_data=f"type:v:{info['id']}", icon_custom_emoji_id=get_eid("🎬"), style=ButtonStyle.SUCCESS))
+        if info.get('is_youtube'):
+            builder.row(InlineKeyboardButton(text=to_small_caps("Video"), callback_data=f"type:v:{info['id']}"))
         else:
-            builder.row(InlineKeyboardButton(text=to_small_caps("Download Video"), callback_data=f"dl:v:{info['id']}:best", icon_custom_emoji_id=get_eid("🎬"), style=ButtonStyle.SUCCESS))
+            builder.row(InlineKeyboardButton(text=to_small_caps("Download Video"), callback_data=f"dl:v:{info['id']}:best"))
     
     if "audio" in info['media_types']:
-        builder.row(InlineKeyboardButton(text=to_small_caps("Audio (MP3)"), callback_data=f"type:a:{info['id']}", icon_custom_emoji_id=get_eid("🎵"), style=ButtonStyle.PRIMARY))
+        builder.row(InlineKeyboardButton(text=to_small_caps("Audio (MP3)"), callback_data=f"type:a:{info['id']}"))
     
     if "image" in info['media_types']:
-        builder.row(InlineKeyboardButton(text=to_small_caps("Image"), callback_data=f"dl:i:{info['id']}:best", icon_custom_emoji_id=get_eid("🖼"), style=ButtonStyle.SUCCESS))
+        builder.row(InlineKeyboardButton(text=to_small_caps("Image"), callback_data=f"dl:i:{info['id']}:best"))
 
-    builder.row(InlineKeyboardButton(text=to_small_caps("Cancel"), callback_data="cancel", icon_custom_emoji_id=get_eid("❌"), style=ButtonStyle.DANGER))
+    builder.row(InlineKeyboardButton(text=to_small_caps("Cancel"), callback_data="cancel"))
 
     if not hasattr(bot, "_media_info"): bot._media_info = {}
     bot._media_info[info['id']] = info
 
     await status.delete()
-    if info['thumbnail']:
+    if info.get('thumbnail'):
         try:
             await message.answer_photo(info['thumbnail'], caption=caption, reply_markup=builder.as_markup(), parse_mode="HTML")
+            return
         except Exception:
-            await message.answer(caption, reply_markup=builder.as_markup(), parse_mode="HTML")
-    else:
-        await message.answer(caption, reply_markup=builder.as_markup(), parse_mode="HTML")
+            pass
+    
+    await message.answer(caption, reply_markup=builder.as_markup(), parse_mode="HTML")
 
 @router.callback_query(F.data.startswith("type:"))
 async def cb_type_select(query: types.CallbackQuery, bot: Bot):
