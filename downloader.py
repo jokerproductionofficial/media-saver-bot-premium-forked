@@ -53,8 +53,8 @@ def get_ytdl_opts(platform: str = "generic") -> Dict:
         opts["cookiefile"] = cookie_file
 
     if platform == "youtube":
-        # Removed restrictive player_client to allow all resolutions including DASH
-        opts["format"] = "all" # Hint to list everything
+        # Ensure robust format selection
+        opts["format"] = "bestvideo+bestaudio/best"
         pass
         
     return opts
@@ -193,8 +193,8 @@ async def download_media(url: str, platform: str, user_id: int, quality: str = "
         opts["format"] = "bestvideo+bestaudio/best"
     elif quality.endswith("p") or quality in ["4K", "8K"]:
         h = 2160 if quality == "4K" else 4320 if quality == "8K" else int(quality[:-1])
-        # Find best video with this height + best audio
-        opts["format"] = f"bestvideo[height<={h}]+bestaudio/best[height<={h}]"
+        # Find best video with this height + best audio, with fallbacks to avoid errors
+        opts["format"] = f"bestvideo[height<={h}]+bestaudio/best[height<={h}]/best"
     
     filename = f"{user_id}_{quality}_{int(asyncio.get_event_loop().time())}"
     filepath = os.path.join(DOWNLOAD_DIR, f"{filename}.%(ext)s")
