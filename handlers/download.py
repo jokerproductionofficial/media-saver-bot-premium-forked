@@ -213,13 +213,42 @@ async def progress_callback(current, total, msg, start_time, bot_name):
 async def _run_download(query, bot, info, mtype, quality, prog_msg):
     user_id = query.from_user.id
     filepath = None
+    loop = asyncio.get_event_loop()
+    
     try:
-        def hook(d): pass
+        def download_hook(d):
+            if d['status'] == 'downloading':
+                now = time.time()
+                last_update = getattr(prog_msg, "_last_dl_update", 0)
+                if now - last_update < 3: return
+                prog_msg._last_dl_update = now
+
+                current = d.get('downloaded_bytes', 0)
+                total = d.get('total_bytes') or d.get('total_bytes_estimate', 0)
+                if not total: return
+                
+                percentage = (current / total) * 100
+                speed = d.get('speed', 0)
+                
+                bar = get_progress_bar(current, total)
+                
+                text = (
+                    f"<b>{BOT_NAME} {to_small_caps('Download Progress Bar')}</b> {get_etag('✅')}\n"
+                    f"━━━━━━━━━━━━━━━━━\n"
+                    f"<code>{bar}</code>\n"
+                    f"<b>{to_small_caps('Percentage')}:</b> {percentage:.2f}%\n"
+                    f"<b>{to_small_caps('Speed')}:</b> {format_bytes(speed)}/s\n"
+                    f"<b>{to_small_caps('Status')}:</b> {format_bytes(current)} {to_small_caps('of')} {format_bytes(total)}\n"
+                    f"━━━━━━━━━━━━━━━━━\n"
+                    f"<b>{to_small_caps('Smooth Transfer → Activated')}</b> {get_etag('✅')}"
+                )
+                
+                asyncio.run_coroutine_threadsafe(prog_msg.edit_text(text, parse_mode="HTML"), loop)
 
         if mtype == 'v':
-            filepath = await dl.download_media(info['url'], info['platform'], user_id, quality, hook)
+            filepath = await dl.download_media(info['url'], info['platform'], user_id, quality, download_hook)
         elif mtype == 'a':
-            filepath = await dl.download_audio(info['url'], quality, user_id, hook)
+            filepath = await dl.download_audio(info['url'], quality, user_id, download_hook)
         elif mtype == 'i': # image
             # For images, we can often just pick the best thumbnail if download_media fails
             try:
