@@ -213,14 +213,17 @@ async def progress_callback(current, total, msg, start_time, bot_name):
 async def _run_download(query, bot, info, mtype, quality, prog_msg):
     user_id = query.from_user.id
     filepath = None
-    loop = asyncio.get_event_loop()
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = asyncio.get_event_loop()
     
     try:
         def download_hook(d):
             if d['status'] == 'downloading':
                 now = time.time()
                 last_update = getattr(prog_msg, "_last_dl_update", 0)
-                if now - last_update < 3: return
+                if now - last_update < 4: return # Slightly longer throttle for safety
                 prog_msg._last_dl_update = now
 
                 current = d.get('downloaded_bytes', 0)
@@ -243,7 +246,14 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
                     f"<b>{to_small_caps('Smooth Transfer → Activated')}</b> {get_etag('✅')}"
                 )
                 
-                asyncio.run_coroutine_threadsafe(prog_msg.edit_text(text, parse_mode="HTML"), loop)
+                # Using bot.edit_message_text directly for better thread safety with aiogram
+                coro = bot.edit_message_text(
+                    text=text,
+                    chat_id=prog_msg.chat.id,
+                    message_id=prog_msg.message_id,
+                    parse_mode="HTML"
+                )
+                asyncio.run_coroutine_threadsafe(coro, loop)
 
         if mtype == 'v':
             filepath = await dl.download_media(info['url'], info['platform'], user_id, quality, download_hook)
