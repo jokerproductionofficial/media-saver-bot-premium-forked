@@ -157,7 +157,9 @@ async def guard_user(event: Union[Message, CallbackQuery], bot: Bot) -> bool:
 
     return True
 
-def format_views(count: int) -> str:
+def format_views(count: Union[int, None]) -> str:
+    if count is None:
+        return "N/A"
     if count >= 1_000_000:
         return f"{count/1_000_000:.1f}M"
     if count >= 1_000:
