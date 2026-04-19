@@ -32,30 +32,30 @@ def _get_cookie_file(platform: str) -> Optional[str]:
 
 def get_ytdl_opts(platform: str = "generic") -> Dict:
     opts = {
-        "format": "bestvideo+bestaudio/best",
         "quiet": True,
         "no_warnings": True,
-        "noplaylist": True,
+        "nocheckcertificate": True,
+        "ignoreerrors": True,
+        "logtostderr": False,
+        "no_color": True,
+        "no_playlist": True,
+        "extract_flat": False,
+        "format": "bestvideo+bestaudio/best",
         "socket_timeout": 30,
         "retries": 3,
-        "nocheckcertificate": True,
-        "http_headers": {
-            "User-Agent": (
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/125.0.0.0 Safari/537.36"
-            ),
-        },
+    }
+
+    # Verified headers to avoid bot blocks
+    opts["headers"] = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
     }
 
     cookie_file = _get_cookie_file(platform)
     if cookie_file:
         opts["cookiefile"] = cookie_file
 
-    if platform == "youtube":
-        # Do NOT set format here for info extraction, it can cause errors
-        pass
-        
     return opts
 
 async def fetch_info(url: str) -> Dict:
@@ -99,27 +99,21 @@ async def fetch_info(url: str) -> Dict:
     is_image = False
 
     # Check for video
-    # 1. Has specific resolutions
-    if info['available_qualities'] and info['available_qualities'] != ["360p", "720p"]:
+    if platform in ['youtube', 'tiktok', 'instagram', 'facebook', 'telegram']:
         is_video = True
-    # 2. Has formats with vcodec != 'none'
-    elif any(f.get('vcodec') != 'none' for f in formats if f.get('vcodec')):
-        is_video = True
-    # 3. Known video-primary platform
-    elif platform in ['youtube', 'tiktok', 'instagram', 'facebook', 'telegram']:
-        is_video = True
+    elif info_dict.get('formats'):
+        if any(f.get('vcodec') != 'none' for f in formats if f.get('vcodec')):
+            is_video = True
     
     # Check for audio
-    if any(f.get('acodec') != 'none' for f in formats if f.get('ext') in ['mp3', 'm4a', 'wav', 'ogg']):
+    if platform == 'youtube':
         is_audio = True
-    elif platform == 'youtube': # YouTube always has audio
+    elif any(f.get('acodec') != 'none' for f in formats if f.get('acodec')):
         is_audio = True
-
+    
     # Check for image
-    if info_dict.get('ext') in ['jpg', 'jpeg', 'png', 'webp']:
-        is_image = True
-    elif not is_video and not is_audio and (info_dict.get('thumbnails') or platform == 'pinterest'):
-        is_image = True
+    if platform == 'pinterest' or info_dict.get('ext') in ['jpg', 'jpeg', 'png', 'webp']:
+        is_image = True if not is_video else False
 
     # Assign final media types
     if is_video: info['media_types'].append('video')
