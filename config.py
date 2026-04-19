@@ -121,8 +121,24 @@ def _decode_cookie_payload(raw_text: str, raw_b64: str) -> str:
     if not raw_b64:
         return ""
 
+    payload = "".join(raw_b64.strip().split())
+    payload = payload.strip("\"'")
+    if not payload:
+        return ""
+
+    missing_padding = (-len(payload)) % 4
+    if missing_padding:
+        payload += "=" * missing_padding
+
     try:
-        decoded = base64.b64decode(raw_b64).decode("utf-8")
+        decoded_bytes = base64.b64decode(payload)
+    except binascii.Error:
+        try:
+            decoded_bytes = base64.urlsafe_b64decode(payload)
+        except (binascii.Error, UnicodeDecodeError) as exc:
+            raise ValueError(f"Invalid base64 cookie payload: {exc}") from exc
+    try:
+        decoded = decoded_bytes.decode("utf-8")
     except (binascii.Error, UnicodeDecodeError) as exc:
         raise ValueError(f"Invalid base64 cookie payload: {exc}") from exc
 
