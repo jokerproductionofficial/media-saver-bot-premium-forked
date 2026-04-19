@@ -1,5 +1,7 @@
 """config.py — Environment variables and bot constants."""
 
+import base64
+import binascii
 import os
 from dotenv import load_dotenv
 
@@ -37,6 +39,10 @@ LOG_FILE: str = os.getenv("LOG_FILE", "bot.log")
 # COOKIES_FILE:    For Instagram and other platforms (NOT YouTube).
 YT_COOKIES_FILE: str = os.getenv("YT_COOKIES_FILE", "yt_cookies.txt")
 COOKIES_FILE: str = os.getenv("COOKIES_FILE", "cookies.txt")
+YT_COOKIES_CONTENT: str = os.getenv("YT_COOKIES_CONTENT", "")
+YT_COOKIES_B64: str = os.getenv("YT_COOKIES_B64", "")
+COOKIES_CONTENT: str = os.getenv("COOKIES_CONTENT", "")
+COOKIES_B64: str = os.getenv("COOKIES_B64", "")
 
 # ── Cache ─────────────────────────────────────────────────────────────────────
 CACHE_ENABLED: bool = os.getenv("CACHE_ENABLED", "true").lower() == "true"
@@ -106,3 +112,45 @@ def get_help_message() -> str:
 
 if not BOT_TOKEN:
     raise ValueError("❌ BOT_TOKEN not set in Railway environment variables!")
+
+
+def _decode_cookie_payload(raw_text: str, raw_b64: str) -> str:
+    if raw_text:
+        return raw_text.replace("\r\n", "\n").strip() + "\n"
+
+    if not raw_b64:
+        return ""
+
+    try:
+        decoded = base64.b64decode(raw_b64).decode("utf-8")
+    except (binascii.Error, UnicodeDecodeError) as exc:
+        raise ValueError(f"Invalid base64 cookie payload: {exc}") from exc
+
+    return decoded.replace("\r\n", "\n").strip() + "\n"
+
+
+def _write_cookie_file(path: str, content: str) -> bool:
+    if not content:
+        return False
+
+    parent = os.path.dirname(path)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+
+    with open(path, "w", encoding="utf-8", newline="\n") as handle:
+        handle.write(content)
+    return True
+
+
+def sync_cookie_files_from_env() -> dict:
+    result = {"youtube": False, "generic": False}
+
+    yt_content = _decode_cookie_payload(YT_COOKIES_CONTENT, YT_COOKIES_B64)
+    if yt_content:
+        result["youtube"] = _write_cookie_file(YT_COOKIES_FILE, yt_content)
+
+    generic_content = _decode_cookie_payload(COOKIES_CONTENT, COOKIES_B64)
+    if generic_content:
+        result["generic"] = _write_cookie_file(COOKIES_FILE, generic_content)
+
+    return result

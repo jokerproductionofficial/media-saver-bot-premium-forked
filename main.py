@@ -9,7 +9,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
 
-from config import BOT_TOKEN, DOWNLOAD_DIR, LOG_FILE
+from config import BOT_TOKEN, DOWNLOAD_DIR, LOG_FILE, sync_cookie_files_from_env
 from database.db import init_db
 from downloader import cleanup_old_files
 from handlers import admin, download, start
@@ -36,6 +36,15 @@ logging.getLogger("aiogram").setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 async def on_startup(bot: Bot):
+    try:
+        cookie_sync = sync_cookie_files_from_env()
+        if cookie_sync["youtube"]:
+            logger.info("✅ YouTube cookies loaded from environment.")
+        if cookie_sync["generic"]:
+            logger.info("✅ Generic cookies loaded from environment.")
+    except Exception as e:
+        logger.error(f"❌ Could not load cookies from environment: {e}")
+
     # Ensure ffmpeg is available
     try:
         import subprocess
