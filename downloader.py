@@ -31,6 +31,8 @@ def _get_cookie_file(platform: str) -> Optional[str]:
     return COOKIES_FILE if os.path.exists(COOKIES_FILE) else None
 
 def get_ytdl_opts(platform: str = "generic") -> Dict:
+    # Keep shared options format-agnostic so metadata extraction can fetch
+    # title, thumbnail, views, and formats without tripping format errors.
     opts = {
         "quiet": True,
         "no_warnings": True,
@@ -40,6 +42,8 @@ def get_ytdl_opts(platform: str = "generic") -> Dict:
         "no_color": True,
         "no_playlist": True,
         "extract_flat": False,
+        "socket_timeout": 30,
+        "retries": 3,
     }
 
     # Verified headers
@@ -58,6 +62,8 @@ def get_ytdl_opts(platform: str = "generic") -> Dict:
 async def fetch_info(url: str) -> Dict:
     platform = detect_platform(url)
     opts = get_ytdl_opts(platform)
+    opts.pop("format", None)
+    opts["ignoreerrors"] = False
     
     # We use a separate instance for info extraction to be faster
     loop = asyncio.get_event_loop()
@@ -81,6 +87,7 @@ async def fetch_info(url: str) -> Dict:
         'platform': platform,
         'uploader': info_dict.get('uploader', 'Unknown'),
         'duration': _format_duration(info_dict.get('duration', 0)),
+        'duration_string': _format_duration(info_dict.get('duration', 0)),
         'view_count': info_dict.get('view_count'),
         'is_youtube': platform == 'youtube',
         'media_types': []
@@ -90,38 +97,34 @@ async def fetch_info(url: str) -> Dict:
     formats = info_dict.get('formats', [])
     info['available_qualities'] = _extract_available_resolutions(formats)
     
-    # Determine media types logically
-    is_video = False
-    is_audio = False
-    is_image = False
-
-    # Check for video
-    if platform in ['youtube', 'tiktok', 'instagram', 'facebook', 'telegram']:
-        is_video = True
-    elif info_dict.get('formats'):
-        if any(f.get('vcodec') != 'none' for f in formats if f.get('vcodec')):
-            is_video = True
-    
-    # Check for audio
+    # YouTube should always expose both actions, even if metadata is sparse.
     if platform == 'youtube':
-        is_audio = True
-    elif any(f.get('acodec') != 'none' for f in formats if f.get('acodec')):
-        is_audio = True
-    
-    # Check for image
-    if platform == 'pinterest' or info_dict.get('ext') in ['jpg', 'jpeg', 'png', 'webp']:
-        is_image = True if not is_video else False
+        info['media_types'] = ['video', 'audio']
+    else:
+        is_video = False
+        is_audio = False
+        is_image = False
 
-    # Assign final media types
-    info['media_types'] = []
-    if is_video: info['media_types'].append('video')
-    if is_audio: info['media_types'].append('audio')
-    if is_image: info['media_types'].append('image')
+        if platform in ['tiktok', 'instagram', 'facebook', 'telegram']:
+            is_video = True
+        elif formats:
+            is_video = any(f.get('vcodec') not in (None, 'none') for f in formats)
 
-    # Ensure at least one type
-    if not info['media_types']:
-        info['media_types'] = ['video']
-        if platform == 'youtube': info['media_types'].append('audio')
+        if any(f.get('acodec') not in (None, 'none') for f in formats):
+            is_audio = True
+
+        if platform == 'pinterest' or info_dict.get('ext') in ['jpg', 'jpeg', 'png', 'webp']:
+            is_image = not is_video
+
+        if is_video:
+            info['media_types'].append('video')
+        if is_audio:
+            info['media_types'].append('audio')
+        if is_image:
+            info['media_types'].append('image')
+
+        if not info['media_types']:
+            info['media_types'] = ['video']
 
     # Extract unique heights
     formats = info_dict.get('formats', [])
@@ -177,16 +180,23 @@ def _extract_available_resolutions(formats: List[Dict]) -> List[str]:
 
     return available
 
+def _build_video_format_selector(quality: str) -> str:
+    if quality == "best":
+        return "bestvideo+bestaudio/best"
+
+    if quality.endswith("p") or quality in ["4K", "8K"]:
+        h = 2160 if quality == "4K" else 4320 if quality == "8K" else int(quality[:-1])
+        return (
+            f"bestvideo[height<={h}]+bestaudio/"
+            f"best[height<={h}]/"
+            "bestvideo+bestaudio/best"
+        )
+
+    return "bestvideo+bestaudio/best"
+
 async def download_media(url: str, platform: str, user_id: int, quality: str = "best", progress_hook: Callable = None) -> str:
     opts = get_ytdl_opts(platform)
-    
-    # Correct format string based on quality
-    if quality == "best":
-        opts["format"] = "bestvideo+bestaudio/best"
-    elif quality.endswith("p") or quality in ["4K", "8K"]:
-        h = 2160 if quality == "4K" else 4320 if quality == "8K" else int(quality[:-1])
-        # Find best video with this height + best audio, with widest possible fallbacks
-        opts["format"] = f"bestvideo[height<={h}]+bestaudio/best[height<={h}]/best"
+    opts["format"] = _build_video_format_selector(quality)
     
     filename = f"{user_id}_{quality}_{int(asyncio.get_event_loop().time())}"
     filepath = os.path.join(DOWNLOAD_DIR, f"{filename}.%(ext)s")
@@ -226,6 +236,7 @@ async def download_media(url: str, platform: str, user_id: int, quality: str = "
     return {
         'filepath': filepath,
         'duration': info.get('duration', 0),
+        'duration_raw': info.get('duration', 0),
         'width': info.get('width'),
         'height': info.get('height'),
         'thumbnail': info.get('thumbnail')
@@ -287,14 +298,22 @@ async def _fetch_fallback_info(url: str, platform: str) -> Dict:
                     pass 
 
                 # Improved detection for fallback
-                media_types = []
-                if image: media_types.append('image')
-                
-                # If it's a known video site, always allow video
-                if platform in ['youtube', 'tiktok', 'instagram', 'facebook', 'telegram'] or 'video' in html.lower():
-                    media_types.insert(0, 'video')
-                
-                if not media_types: media_types = ['video']
+                if platform == 'youtube':
+                    media_types = ['video', 'audio']
+                    available_qualities = ["360p", "720p"]
+                else:
+                    media_types = []
+                    if image:
+                        media_types.append('image')
+
+                    # If it's a known video site, always allow video
+                    if platform in ['tiktok', 'instagram', 'facebook', 'telegram'] or 'video' in html.lower():
+                        media_types.insert(0, 'video')
+
+                    if not media_types:
+                        media_types = ['video']
+
+                    available_qualities = ["best"]
 
                 return {
                     'id': f"fallback_{int(asyncio.get_event_loop().time())}",
@@ -304,10 +323,11 @@ async def _fetch_fallback_info(url: str, platform: str) -> Dict:
                     'platform': platform,
                     'uploader': uploader,
                     'duration': "N/A",
+                    'duration_string': "N/A",
                     'view_count': None,
-                    'is_youtube': False,
+                    'is_youtube': platform == 'youtube',
                     'media_types': media_types,
-                    'available_qualities': ["best"]
+                    'available_qualities': available_qualities
                 }
     except Exception as e:
         logger.error(f"Fallback extraction failed: {e}")
