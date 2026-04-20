@@ -410,7 +410,7 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
             f"{get_etag('✅')} <b>{to_small_caps(info['title'][:50])}</b>\n"
             f"{get_etag(_PLATFORM_EMOJI.get(info['platform'], '🌐'))} "
             f"<b>{to_small_caps('Platform')}:</b> {to_small_caps(info['platform'])}\n"
-            f"<b>{to_small_caps('Quality')}:</b> {to_small_caps(quality)}"
+            f"{get_etag('📊')} <b>{to_small_caps('Quality')}:</b> {to_small_caps(quality)}"
         )
 
         file_size = os.path.getsize(filepath)
