@@ -358,11 +358,19 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
                 quality,
                 download_hook,
                 preferred_formats=preferred_formats,
+                direct_video_url=info.get("_direct_video_url"),
             )
         elif mtype == "a":
             filepath = await dl.download_audio(info["url"], quality, user_id, download_hook)
         elif mtype == "i":
-            filepath = await dl.download_media(info["url"], info["platform"], user_id, "best", download_hook)
+            filepath = await dl.download_media(
+                info["url"],
+                info["platform"],
+                user_id,
+                "best",
+                download_hook,
+                direct_video_url=info.get("_direct_video_url"),
+            )
 
         if not filepath:
             raise Exception("File could not be downloaded.")

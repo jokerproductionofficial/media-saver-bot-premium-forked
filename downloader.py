@@ -42,6 +42,14 @@ def _get_cookie_file(platform: str) -> Optional[str]:
     return COOKIES_FILE if os.path.exists(COOKIES_FILE) else None
 
 
+# Chrome version string kept in sync with latest stable for convincing UA
+_CHROME_UA = (
+    "Mozilla/5.0 (X11; Linux x86_64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/124.0.0.0 Safari/537.36"
+)
+
+
 def get_ytdl_opts(platform: str = "generic") -> Dict:
     # Keep shared options format-agnostic so metadata extraction can fetch
     # title, thumbnail, views, and formats without tripping format errors.
@@ -59,15 +67,46 @@ def get_ytdl_opts(platform: str = "generic") -> Dict:
         "retries": 3,
     }
 
+    # Use Linux UA everywhere — Railway runs Linux, Windows UA triggers
+    # Instagram's bot-detection fingerprint mismatch.
     opts["headers"] = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/120.0.0.0 Safari/537.36"
-        ),
+        "User-Agent": _CHROME_UA,
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
     }
+
+    # ── Instagram: must send x-ig-app-id or the API returns 404 / rate-limit ──
+    if platform == "instagram":
+        opts["headers"].update({
+            "x-ig-app-id": "936619743392459",
+            "x-requested-with": "XMLHttpRequest",
+            "Referer": "https://www.instagram.com/",
+            "Origin": "https://www.instagram.com",
+        })
+        # Tell yt-dlp to use the mobile API endpoint which is less strict
+        opts["extractor_args"] = {
+            "instagram": {"api": ["graphql"]}
+        }
+
+    # ── Twitter/X: send a browser-like referer ──
+    elif platform == "twitter":
+        opts["headers"].update({
+            "Referer": "https://twitter.com/",
+            "Origin": "https://twitter.com",
+        })
+
+    # ── YouTube: skip dash/hls storyboards that cause format errors ──
+    elif platform == "youtube":
+        opts["extractor_args"] = {
+            "youtube": {
+                "skip": ["hls", "dash"],
+                "player_client": ["android", "web"],
+            }
+        }
 
     cookie_file = _get_cookie_file(platform)
     if cookie_file:
@@ -110,6 +149,80 @@ def _extract_view_count(info_dict: Dict) -> Optional[int]:
     return None
 
 
+async def _fetch_instagram_api_info(url: str) -> Optional[Dict]:
+    """
+    Fetch Instagram reel/post info using the public embed API — no login needed.
+    Works from server IPs even when yt-dlp is blocked by rate-limiting.
+    """
+    # Extract shortcode from URL, e.g. /reel/ABC123/ or /p/ABC123/
+    match = re.search(r"/(?:reel|p|tv)/([A-Za-z0-9_-]+)", url)
+    if not match:
+        return None
+    shortcode = match.group(1)
+
+    embed_url = f"https://www.instagram.com/p/{shortcode}/embed/captioned/"
+    media_url = f"https://www.instagram.com/p/{shortcode}/?__a=1&__d=dis"
+
+    headers = {
+        "User-Agent": _CHROME_UA,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://www.instagram.com/",
+        "x-ig-app-id": "936619743392459",
+    }
+
+    try:
+        async with aiohttp.ClientSession(headers=headers, timeout=aiohttp.ClientTimeout(total=15)) as session:
+            # Try embed page first (always public, no rate-limit)
+            async with session.get(embed_url) as resp:
+                html = await resp.text() if resp.status == 200 else ""
+
+            if html:
+                # Extract video URL from embed page
+                video_match = re.search(r'"video_url":"([^"]+)"', html)
+                thumb_match = re.search(r'"display_url":"([^"]+)"', html)
+                owner_match = re.search(r'"username":"([^"]+)"', html)
+                title_match = re.search(r'"accessibility_caption":"([^"]+)"', html)
+                plays_match = re.search(r'"play_count":(\d+)', html)
+                likes_match = re.search(r'"like_count":(\d+)', html)
+
+                # Unescape unicode sequences
+                def unescape(s: str) -> str:
+                    return s.encode().decode("unicode_escape") if s else s
+
+                video_url = unescape(video_match.group(1)) if video_match else None
+                thumbnail = unescape(thumb_match.group(1)) if thumb_match else None
+                uploader = owner_match.group(1) if owner_match else "Instagram User"
+                title_raw = title_match.group(1) if title_match else f"Instagram Reel"
+                title = title_raw[:80]
+                view_count = int(plays_match.group(1)) if plays_match else (
+                    int(likes_match.group(1)) if likes_match else None
+                )
+
+                if video_url:
+                    logger.info("Instagram embed API succeeded for %s", shortcode)
+                    return {
+                        "id": shortcode,
+                        "title": title,
+                        "thumbnail": thumbnail,
+                        "url": url,
+                        "_direct_video_url": video_url,  # used by download to skip yt-dlp
+                        "platform": "instagram",
+                        "uploader": uploader,
+                        "duration": "N/A",
+                        "duration_string": "N/A",
+                        "view_count": view_count,
+                        "is_youtube": False,
+                        "media_types": ["video"],
+                        "available_qualities": ["best"],
+                        "quality_candidates": {},
+                    }
+    except Exception as e:
+        logger.warning("Instagram embed API failed for %s: %s", shortcode, e)
+
+    return None
+
+
 async def fetch_info(url: str) -> Dict:
     platform = detect_platform(url)
     info_dict = None
@@ -125,6 +238,11 @@ async def fetch_info(url: str) -> Dict:
 
     if not info_dict:
         logger.warning("yt-dlp failed, trying fallback for %s: %s", url, last_error)
+        # For Instagram, try the embed API before the generic HTML scraper
+        if platform == "instagram":
+            ig_info = await _fetch_instagram_api_info(url)
+            if ig_info:
+                return ig_info
         return await _fetch_fallback_info(url, platform)
 
     formats = info_dict.get("formats", [])
@@ -140,9 +258,10 @@ async def fetch_info(url: str) -> Dict:
     )
 
     if platform == "youtube" and not available_qualities:
-        raise ValueError(
-            "YouTube formats are blocked for this video. Refresh yt_cookies.txt and try again."
-        )
+        # Cookies may be expired or Railway IP is restricted — don't crash,
+        # fall back to generic quality labels and let the download attempt handle it.
+        logger.warning("YouTube quality map empty (cookies may be expired), using generic fallback qualities.")
+        available_qualities = ["1080p", "720p", "480p", "360p", "240p"]
 
     info = {
         "id": info_dict.get("id"),
@@ -578,9 +697,43 @@ async def download_media(
     quality: str = "best",
     progress_hook: Callable = None,
     preferred_formats: Optional[List[str]] = None,
+    direct_video_url: Optional[str] = None,
 ) -> Dict:
     filename = f"{user_id}_{quality}_{int(asyncio.get_event_loop().time())}"
     outtmpl = os.path.join(DOWNLOAD_DIR, f"{filename}.%(ext)s")
+
+    # ── Fast path: embed API gave us a direct CDN URL — skip yt-dlp entirely ──
+    if direct_video_url:
+        filepath = os.path.join(DOWNLOAD_DIR, f"{filename}.mp4")
+        logger.info("Downloading via direct URL for %s", url)
+        try:
+            headers = {
+                "User-Agent": _CHROME_UA,
+                "Referer": "https://www.instagram.com/",
+            }
+            async with aiohttp.ClientSession(headers=headers) as session:
+                async with session.get(direct_video_url) as resp:
+                    if resp.status != 200:
+                        raise ValueError(f"Direct download returned status {resp.status}")
+                    total = int(resp.headers.get("Content-Length", 0))
+                    downloaded = 0
+                    chunk_size = 1024 * 256  # 256 KB
+                    with open(filepath, "wb") as f:
+                        async for chunk in resp.content.iter_chunked(chunk_size):
+                            f.write(chunk)
+                            downloaded += len(chunk)
+                            if progress_hook and total:
+                                progress_hook({
+                                    "status": "downloading",
+                                    "downloaded_bytes": downloaded,
+                                    "total_bytes": total,
+                                    "speed": 0,
+                                })
+            return {"filepath": filepath, "duration_raw": 0, "width": 0, "height": 0, "thumbnail": None}
+        except Exception as e:
+            logger.warning("Direct download failed, falling back to yt-dlp: %s", e)
+            if os.path.exists(filepath):
+                os.remove(filepath)
 
     loop = asyncio.get_event_loop()
     info = None
@@ -606,9 +759,8 @@ async def download_media(
     format_candidates.extend(preferred_formats or [])
 
     if platform == "youtube" and quality != "best" and not format_candidates:
-        raise ValueError(
-            "YouTube formats are blocked for this video. Refresh yt_cookies.txt and try again."
-        )
+        # Don't hard-error — let the generic fallback candidates try
+        logger.warning("YouTube: no exact format candidates found, using generic fallbacks.")
 
     fallback_candidates = _build_video_format_candidates(quality)
     for candidate in fallback_candidates:
