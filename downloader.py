@@ -320,10 +320,18 @@ async def fetch_info(url: str) -> Dict:
         is_audio = False
         is_image = False
 
-        if platform in ["tiktok", "instagram", "facebook", "telegram"]:
+        if platform in ["tiktok", "instagram", "facebook", "telegram", "pinterest"]:
             is_video = True
         elif formats:
-            is_video = any(f.get("vcodec") not in (None, "none") for f in formats)
+            is_video = any(
+                f.get("vcodec") not in (None, "none") or 
+                f.get("ext") in ["mp4", "m3u8", "ts"] or
+                "video" in str(f.get("format_id", "")).lower()
+                for f in formats
+            )
+
+        if info_dict.get("duration", 0) > 0:
+            is_video = True
 
         if any(f.get("acodec") not in (None, "none") for f in formats):
             is_audio = True
@@ -423,7 +431,12 @@ def _is_downloadable_video_format(fmt: Dict) -> bool:
         return False
     if fmt.get("ext") == "mhtml":
         return False
-    return fmt.get("vcodec") not in (None, "none")
+    
+    # Check vcodec, ext, and common video indicators
+    has_vcodec = fmt.get("vcodec") not in (None, "none")
+    is_video_ext = fmt.get("ext") in ["mp4", "m3u8", "ts", "mov", "avi", "get_etag"] # added common exts
+    
+    return has_vcodec or is_video_ext or "video" in format_id.lower()
 
 
 def _is_video_only(fmt: Dict) -> bool:
