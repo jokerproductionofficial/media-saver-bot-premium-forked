@@ -13,7 +13,9 @@ www.pinterest.com	FALSE	/	FALSE	1776764353	_routing_id	"2092cf1e-5a1f-40aa-910b-
 .pinterest.com	TRUE	/	TRUE	1807548581	_pinterest_sess	TWc9PSZ6UStCcUxKbm1JSDdyQTFIVUpJeG1NTnhINUc0YzFIeHpKczk5VmVuY0ZPQUlaL05STCtHcWRkbmFVRmpJTGxFdjFtM1AxdmZIV3RkdnN4T09LOXFFMkdDdlVRdEsxSm9mWTNhSGZlRGNjST0mOXdUd3hiSFQ0UHIySW1UdWFMbUpJUE1aL2xJPQ==
 .pinterest.com	TRUE	/	TRUE	1807548581	_auth	0
 .facebook.com	TRUE	/	TRUE	1811005167	sb	9WbiaTuqGYzuQOi28kQfjKAG
-.instagram.com	TRUE	/	TRUE	1811241042	csrftoken	xkvOxfDLLHDsaOt8x5zMHink7V1eYQn1
+.instagram.com	TRUE	/	TRUE	1811241687	csrftoken	xkvOxfDLLHDsaOt8x5zMHink7V1eYQn1
 .instagram.com	TRUE	/	TRUE	1811237978	mid	aeX0YgALAAGiank9IN8Lqr6lQNtT
 .instagram.com	TRUE	/	TRUE	1808213978	ig_did	3DF19CAE-6256-449E-A904-25381A475882
 .instagram.com	TRUE	/	TRUE	1808213978	ig_nrcb	1
+pin.it	FALSE	/	TRUE	1776683498	_ir	0
+api.pinterest.com	FALSE	/	TRUE	1776683498	_ir	0

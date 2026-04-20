@@ -4765,3 +4765,105 @@ task: <Task pending name='Task-20' coro=<Dispatcher.handler_worker() running at 
 task: <Task pending name='Task-19' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
 2026-04-20 15:48:05,733 | ERROR    | asyncio | Task was destroyed but it is pending!
 task: <Task pending name='Task-18' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 16:00:28,516 | INFO     | __main__ | Starting Polling...
+2026-04-20 16:00:29,903 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC2
+2026-04-20 16:00:29,904 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:00:30,045 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 16:00:31,671 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-20 16:00:31,672 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:00:31,678 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:00:31,820 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 16:00:31,821 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 16:00:32,299 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 16:00:32,299 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 16:00:32,299 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 16:00:32,299 | INFO     | pyrogram.session.session | Session started
+2026-04-20 16:00:32,301 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 16:00:32,470 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 16:00:32,471 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 16:00:32,471 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:00:32,471 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 16:00:32,471 | ERROR    | utils.pyro_client | ❌ Failed to start Pyrogram: Telegram says: [420 FLOOD_WAIT_X] (caused by "auth.ImportBotAuthorization") Pyrogram 2.3.69 thinks: A wait of 452 seconds is required
+2026-04-20 16:00:32,472 | INFO     | __main__ | ✅ YouTube cookies loaded from file.
+2026-04-20 16:00:32,472 | INFO     | __main__ | ✅ Generic cookies loaded from file.
+2026-04-20 16:00:32,513 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-20 16:00:32,517 | INFO     | database.db | Database initialized
+2026-04-20 16:00:32,663 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-20 16:00:32,663 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-20 16:00:32,663 | INFO     | aiogram.dispatcher | Start polling
+2026-04-20 16:00:32,806 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 16:00:37,861 | INFO     | aiogram.event | Update id=55588120 is handled. Duration 4908 ms by bot id=8211473742
+2026-04-20 16:00:39,897 | INFO     | aiogram.event | Update id=55588121 is handled. Duration 340 ms by bot id=8211473742
+2026-04-20 16:00:42,882 | ERROR    | handlers.download | Download failed: Client has not been started yet
+2026-04-20 16:00:50,470 | INFO     | aiogram.event | Update id=55588122 is handled. Duration 4025 ms by bot id=8211473742
+2026-04-20 16:00:51,867 | INFO     | aiogram.event | Update id=55588123 is handled. Duration 378 ms by bot id=8211473742
+2026-04-20 16:00:52,989 | INFO     | aiogram.event | Update id=55588124 is handled. Duration 352 ms by bot id=8211473742
+2026-04-20 16:01:00,258 | INFO     | aiogram.event | Update id=55588125 is handled. Duration 1783 ms by bot id=8211473742
+2026-04-20 16:01:01,666 | INFO     | aiogram.event | Update id=55588126 is handled. Duration 368 ms by bot id=8211473742
+2026-04-20 16:01:05,321 | ERROR    | handlers.download | Download failed: Client has not been started yet
+2026-04-20 16:09:23,681 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-20 16:09:23,681 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-20 16:09:23,682 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-20 16:09:23,935 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 16:09:23,936 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-20 16:09:32,961 | INFO     | __main__ | Starting Polling...
+2026-04-20 16:09:34,208 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC2
+2026-04-20 16:09:34,208 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:09:34,350 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 16:09:36,295 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-20 16:09:36,295 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:09:36,301 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:09:36,424 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 16:09:36,425 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 16:09:36,803 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 16:09:36,803 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 16:09:36,803 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 16:09:36,803 | INFO     | pyrogram.session.session | Session started
+2026-04-20 16:09:36,805 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 16:09:36,937 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 16:09:36,937 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 16:09:36,937 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:09:36,937 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 16:09:36,941 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC4
+2026-04-20 16:09:36,941 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:09:37,092 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-20 16:09:38,774 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-20 16:09:38,775 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:09:38,779 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:09:38,904 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-20 16:09:38,904 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 16:09:39,292 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 16:09:39,292 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 16:09:39,292 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 16:09:39,292 | INFO     | pyrogram.session.session | Session started
+2026-04-20 16:09:39,293 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 16:09:39,718 | INFO     | pyrogram.dispatcher | Started 50 HandlerTasks
+2026-04-20 16:09:39,719 | INFO     | utils.pyro_client | ✅ Pyrogram (MTProto) started for 2GB support.
+2026-04-20 16:09:39,719 | INFO     | __main__ | ✅ YouTube cookies loaded from file.
+2026-04-20 16:09:39,719 | INFO     | __main__ | ✅ Generic cookies loaded from file.
+2026-04-20 16:09:39,759 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-20 16:09:39,763 | INFO     | database.db | Database initialized
+2026-04-20 16:09:39,889 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-20 16:09:39,889 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-20 16:09:39,889 | INFO     | aiogram.dispatcher | Start polling
+2026-04-20 16:09:40,013 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 16:10:46,351 | INFO     | pyrogram.client | {
+    "_": "types.UpdatesTooLong"
+}
+2026-04-20 16:10:47,434 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramUnauthorizedError: Telegram server says - Unauthorized
+2026-04-20 16:10:47,434 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-20 16:10:48,572 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramUnauthorizedError: Telegram server says - Unauthorized
+2026-04-20 16:10:48,573 | WARNING  | aiogram.dispatcher | Sleep for 1.127569 seconds and try again... (tryings = 1, bot id = 8211473742)
+2026-04-20 16:10:49,832 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramUnauthorizedError: Telegram server says - Unauthorized
+2026-04-20 16:10:49,832 | WARNING  | aiogram.dispatcher | Sleep for 1.385436 seconds and try again... (tryings = 2, bot id = 8211473742)
+2026-04-20 16:10:51,345 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramUnauthorizedError: Telegram server says - Unauthorized
+2026-04-20 16:10:51,346 | WARNING  | aiogram.dispatcher | Sleep for 1.771644 seconds and try again... (tryings = 3, bot id = 8211473742)
+2026-04-20 16:10:53,247 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramUnauthorizedError: Telegram server says - Unauthorized
+2026-04-20 16:10:53,247 | WARNING  | aiogram.dispatcher | Sleep for 2.318001 seconds and try again... (tryings = 4, bot id = 8211473742)
+2026-04-20 16:10:55,693 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramUnauthorizedError: Telegram server says - Unauthorized
+2026-04-20 16:10:55,693 | WARNING  | aiogram.dispatcher | Sleep for 3.031235 seconds and try again... (tryings = 5, bot id = 8211473742)
+2026-04-20 16:10:58,859 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramUnauthorizedError: Telegram server says - Unauthorized
+2026-04-20 16:10:58,859 | WARNING  | aiogram.dispatcher | Sleep for 3.732003 seconds and try again... (tryings = 6, bot id = 8211473742)
+2026-04-20 16:11:01,643 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-20 16:11:01,905 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 16:11:01,906 | INFO     | __main__ | 👋 Bot Stopped.

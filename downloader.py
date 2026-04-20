@@ -264,21 +264,33 @@ async def fetch_info(url: str) -> Dict:
         duration=duration_raw,
     )
 
-    if platform == "youtube" and not available_qualities:
-        # Cookies may be expired or Railway IP is restricted — don't crash,
-        # fall back to generic quality labels and let the download attempt handle it.
-        logger.warning("YouTube quality map empty (cookies may be expired), using generic fallback qualities.")
-        available_qualities = ["4K", "1440p", "1080p", "720p", "480p", "360p", "240p"]
+    if platform == "youtube":
+        # Always merge with a set of standard qualities to ensure 4K/1080p appear 
+        # even if cookies/IP restrict the initial metadata extraction.
+        standard_list = ["4K", "1440p", "1080p", "720p", "480p", "360p", "240p"]
+        existing = set(available_qualities)
+        for q in standard_list:
+            if q not in existing:
+                available_qualities.append(q)
+        
+        # Re-sort available qualities
+        available_qualities = sorted(
+            list(set(available_qualities)), 
+            key=lambda x: _quality_to_height(x) or 0, 
+            reverse=True
+        )
 
     title = info_dict.get("title") or info_dict.get("description") or "Unknown Title"
     if title == "Unknown Title" and platform == "pinterest":
-        # Pinterest often has title in 'description'
         title = info_dict.get("description", "Pinterest Pin")
 
     uploader = (
         info_dict.get("uploader") or 
         info_dict.get("uploader_id") or 
         info_dict.get("channel") or 
+        info_dict.get("channel_id") or
+        info_dict.get("owner") or
+        info_dict.get("creator") or
         "Unknown"
     )
 
