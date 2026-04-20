@@ -131,10 +131,11 @@ def _extract_view_count(info_dict: Dict) -> Optional[int]:
       - TikTok:            view_count or play_count
     Also checks nested entries[0] for playlist-wrapped responses.
     """
+    # Some extractors (like Pinterest) use different field names for views
     _VIEW_FIELDS = [
         "view_count", "play_count", "video_view_count",
-        "repost_count",  # Twitter
-        "like_count",    # last-resort proxy
+        "repost_count", "repin_count", "like_count",
+        "comment_count", "follower_count"
     ]
     # Try top-level first
     for field in _VIEW_FIELDS:
@@ -142,7 +143,7 @@ def _extract_view_count(info_dict: Dict) -> Optional[int]:
         if val is not None:
             return int(val)
 
-    # Some extractors wrap real info in entries[0] (e.g. Instagram)
+    # Check nested entries
     entries = info_dict.get("entries") or []
     if entries:
         first = entries[0] if isinstance(entries, list) else None
@@ -267,15 +268,27 @@ async def fetch_info(url: str) -> Dict:
         # Cookies may be expired or Railway IP is restricted — don't crash,
         # fall back to generic quality labels and let the download attempt handle it.
         logger.warning("YouTube quality map empty (cookies may be expired), using generic fallback qualities.")
-        available_qualities = ["1080p", "720p", "480p", "360p", "240p"]
+        available_qualities = ["4K", "1440p", "1080p", "720p", "480p", "360p", "240p"]
+
+    title = info_dict.get("title") or info_dict.get("description") or "Unknown Title"
+    if title == "Unknown Title" and platform == "pinterest":
+        # Pinterest often has title in 'description'
+        title = info_dict.get("description", "Pinterest Pin")
+
+    uploader = (
+        info_dict.get("uploader") or 
+        info_dict.get("uploader_id") or 
+        info_dict.get("channel") or 
+        "Unknown"
+    )
 
     info = {
         "id": info_dict.get("id"),
-        "title": info_dict.get("title", "Unknown Title"),
+        "title": title[:100],
         "thumbnail": info_dict.get("thumbnail"),
         "url": url,
         "platform": platform,
-        "uploader": info_dict.get("uploader", "Unknown"),
+        "uploader": uploader,
         "duration": _format_duration(info_dict.get("duration", 0)),
         "duration_string": _format_duration(info_dict.get("duration", 0)),
         "view_count": _extract_view_count(info_dict),
