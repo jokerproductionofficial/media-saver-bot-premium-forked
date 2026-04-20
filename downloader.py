@@ -434,7 +434,7 @@ def _is_downloadable_video_format(fmt: Dict) -> bool:
     
     # Check vcodec, ext, and common video indicators
     has_vcodec = fmt.get("vcodec") not in (None, "none")
-    is_video_ext = fmt.get("ext") in ["mp4", "m3u8", "ts", "mov", "avi", "get_etag"] # added common exts
+    is_video_ext = fmt.get("ext") in ["mp4", "m3u8", "ts", "mov", "avi", "mkv"] # added common exts
     
     return has_vcodec or is_video_ext or "video" in format_id.lower()
 
