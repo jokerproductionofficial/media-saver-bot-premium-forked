@@ -105,8 +105,14 @@ def get_ytdl_opts(platform: str = "generic") -> Dict:
             "youtube": {
                 "skip": ["hls", "dash"],
                 "player_client": ["android", "web"],
+                "player_skip": ["webpage", "configs"],
             }
         }
+        # Add a specific header that helps bypass some bot detection
+        opts["headers"].update({
+            "X-YouTube-Client-Name": "1",
+            "X-YouTube-Client-Version": "2.20240320.00.00",
+        })
 
     cookie_file = _get_cookie_file(platform)
     if cookie_file:
@@ -307,9 +313,10 @@ async def fetch_info(url: str) -> Dict:
         if not info["media_types"]:
             info["media_types"] = ["video"]
 
-    info["duration_raw"] = duration_raw
-    info["width"] = info_dict.get("width")
-    info["height"] = info_dict.get("height")
+    # CRITICAL: Force to int to prevent Pyrogram "float' object has no attribute 'to_bytes'" error on servers
+    info["duration_raw"] = int(float(duration_raw)) if duration_raw else 0
+    info["width"] = int(float(info_dict.get("width") or 0))
+    info["height"] = int(float(info_dict.get("height") or 0))
 
     return info
 
@@ -816,10 +823,10 @@ async def download_media(
 
     return {
         "filepath": filepath,
-        "duration": info.get("duration", 0),
-        "duration_raw": info.get("duration", 0),
-        "width": info.get("width"),
-        "height": info.get("height"),
+        "duration": int(float(info.get("duration") or 0)),
+        "duration_raw": int(float(info.get("duration") or 0)),
+        "width": int(float(info.get("width") or 0)),
+        "height": int(float(info.get("height") or 0)),
         "thumbnail": info.get("thumbnail"),
     }
 
