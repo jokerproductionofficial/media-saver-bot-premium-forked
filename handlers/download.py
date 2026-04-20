@@ -55,17 +55,23 @@ def _build_info_caption(info: Dict, title_limit: int = 60) -> str:
         title = title[: title_limit - 3] + "..."
 
     duration = info.get("duration_string", info.get("duration", "N/A"))
-
-    return (
+    views = format_views(info.get("view_count"))
+    
+    caption = (
         f"{get_etag(_PLATFORM_EMOJI.get(info.get('platform', 'generic'), '🌐'))} "
         f"<b>{to_small_caps(title)}</b>\n\n"
         f"{get_etag('👤')} <b>{to_small_caps('Uploader:')}</b> "
         f"{to_small_caps(info.get('uploader', 'Unknown'))}\n"
-        f"{get_etag('👁')} <b>{to_small_caps('Views:')}</b> "
-        f"{format_views(info.get('view_count'))}\n"
-        f"{get_etag('🕐')} <b>{to_small_caps('Duration:')}</b> {duration}\n\n"
-        f"{get_etag('👇')} <b>{to_small_caps('Choose Download Type:')}</b>"
     )
+
+    if views and views != "N/A" and views != "0":
+        caption += f"{get_etag('👁')} <b>{to_small_caps('Views:')}</b> {views}\n"
+    
+    if duration and duration != "N/A" and duration != "00:00":
+        caption += f"{get_etag('🕐')} <b>{to_small_caps('Duration:')}</b> {duration}\n"
+
+    caption += f"\n{get_etag('👇')} <b>{to_small_caps('Choose Download Type:')}</b>"
+    return caption
 
 
 def _build_media_keyboard(info: Dict) -> InlineKeyboardMarkup:

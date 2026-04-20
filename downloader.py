@@ -291,6 +291,9 @@ async def fetch_info(url: str) -> Dict:
         info_dict.get("channel_id") or
         info_dict.get("owner") or
         info_dict.get("creator") or
+        info_dict.get("pinner") or
+        info_dict.get("author") or
+        info_dict.get("author_name") or
         "Unknown"
     )
 

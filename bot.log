@@ -4867,3 +4867,82 @@ task: <Task pending name='Task-18' coro=<Dispatcher.handler_worker() running at 
 2026-04-20 16:11:01,643 | INFO     | aiogram.dispatcher | Polling stopped
 2026-04-20 16:11:01,905 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
 2026-04-20 16:11:01,906 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-20 16:11:08,619 | INFO     | __main__ | Starting Polling...
+2026-04-20 16:11:12,400 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC2
+2026-04-20 16:11:12,400 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:11:12,543 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 16:11:14,490 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-20 16:11:14,491 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:11:14,497 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:11:14,622 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 16:11:14,623 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 16:11:15,012 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 16:11:15,012 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 16:11:15,012 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 16:11:15,012 | INFO     | pyrogram.session.session | Session started
+2026-04-20 16:11:15,013 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 16:11:15,148 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 16:11:15,149 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 16:11:15,149 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:11:15,149 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 16:11:15,152 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC4
+2026-04-20 16:11:15,152 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:11:15,275 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-20 16:11:16,815 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-20 16:11:16,815 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:11:16,819 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:11:16,951 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-20 16:11:16,951 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 16:11:17,387 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 16:11:17,388 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 16:11:17,388 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 16:11:17,388 | INFO     | pyrogram.session.session | Session started
+2026-04-20 16:11:17,388 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 16:11:17,846 | INFO     | pyrogram.dispatcher | Started 50 HandlerTasks
+2026-04-20 16:11:17,846 | INFO     | utils.pyro_client | ✅ Pyrogram (MTProto) started for 2GB support.
+2026-04-20 16:11:17,847 | INFO     | __main__ | ✅ YouTube cookies loaded from file.
+2026-04-20 16:11:17,847 | INFO     | __main__ | ✅ Generic cookies loaded from file.
+2026-04-20 16:11:17,886 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-20 16:11:17,889 | INFO     | database.db | Database initialized
+2026-04-20 16:11:18,012 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-20 16:11:18,012 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-20 16:11:18,012 | INFO     | aiogram.dispatcher | Start polling
+2026-04-20 16:11:18,134 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 16:11:18,708 | INFO     | aiogram.event | Update id=55588129 is handled. Duration 432 ms by bot id=8211473742
+2026-04-20 16:11:18,770 | INFO     | aiogram.event | Update id=55588127 is handled. Duration 509 ms by bot id=8211473742
+2026-04-20 16:11:18,825 | INFO     | aiogram.event | Update id=55588128 is handled. Duration 555 ms by bot id=8211473742
+2026-04-20 16:11:23,451 | INFO     | aiogram.event | Update id=55588130 is handled. Duration 1393 ms by bot id=8211473742
+2026-04-20 16:11:24,964 | INFO     | aiogram.event | Update id=55588131 is handled. Duration 359 ms by bot id=8211473742
+2026-04-20 16:11:27,662 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:11:27,842 | INFO     | pyrogram.connection.connection | Connected! Production DC4 (media) - IPv4
+2026-04-20 16:11:27,842 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 16:11:28,394 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 16:11:28,394 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 16:11:28,394 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 16:11:28,394 | INFO     | pyrogram.session.session | Session started
+2026-04-20 16:11:28,395 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 16:11:28,954 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 16:11:28,955 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 16:11:28,955 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:11:28,955 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 16:11:28,959 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:11:29,134 | INFO     | pyrogram.connection.connection | Connected! Production DC4 (media) - IPv4
+2026-04-20 16:11:29,134 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 16:11:29,688 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 16:11:29,689 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 16:11:29,689 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 16:11:29,689 | INFO     | pyrogram.session.session | Session started
+2026-04-20 16:11:29,691 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 16:11:30,774 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 16:11:30,775 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 16:11:30,775 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:11:30,775 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 16:11:40,004 | INFO     | aiogram.event | Update id=55588132 is handled. Duration 2127 ms by bot id=8211473742
+2026-04-20 16:11:41,574 | INFO     | aiogram.event | Update id=55588133 is handled. Duration 190 ms by bot id=8211473742
+2026-04-20 16:11:56,189 | INFO     | aiogram.event | Update id=55588134 is handled. Duration 3952 ms by bot id=8211473742
+2026-04-20 16:11:58,119 | INFO     | aiogram.event | Update id=55588135 is handled. Duration 350 ms by bot id=8211473742
+2026-04-20 16:14:09,439 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-20 16:14:09,440 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-20 16:14:09,440 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-20 16:14:09,704 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 16:14:09,705 | INFO     | __main__ | 👋 Bot Stopped.
