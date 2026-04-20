@@ -25,6 +25,7 @@ from utils.helpers import (
     guard_user,
     safe_edit,
     to_small_caps,
+    math_bold_italic,
 )
 from utils.pyro_client import pyro_app
 
