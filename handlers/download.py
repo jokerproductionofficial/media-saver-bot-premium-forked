@@ -9,6 +9,7 @@ from typing import Dict
 
 from aiogram import Bot, F, Router, types
 from aiogram.enums import ButtonStyle
+from aiogram.exceptions import TelegramBadRequest
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
@@ -372,10 +373,14 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
             results = filepath
             filepath = results.get("filepath")
 
-        await prog_msg.edit_text(
-            f"{get_etag('📤')} <b>{to_small_caps('Uploading...')}</b>",
-            parse_mode="HTML",
-        )
+        try:
+            await prog_msg.edit_text(
+                f"{get_etag('📤')} <b>{to_small_caps('Uploading...')}</b>",
+                parse_mode="HTML",
+            )
+        except TelegramBadRequest as _e:
+            if "message is not modified" not in str(_e):
+                raise
 
         # Download thumbnail if available for direct video view.
         thumb_path = None
@@ -424,7 +429,11 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
             else f"{get_etag('📤')} <b>{to_small_caps('Uploading...')}</b>"
         )
 
-        await prog_msg.edit_text(upload_text, parse_mode="HTML")
+        try:
+            await prog_msg.edit_text(upload_text, parse_mode="HTML")
+        except TelegramBadRequest as _e:
+            if "message is not modified" not in str(_e):
+                raise
         pyro_app.loop = loop
 
         try:
@@ -476,11 +485,19 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
         await prog_msg.delete()
 
     except Exception as e:
+        err_str = str(e)
+        if "message is not modified" in err_str:
+            # Harmless race: progress hook already showed this text, skip logging.
+            return
         logger.error(f"Download failed: {e}")
-        await prog_msg.edit_text(
-            f"{get_etag('❌')} <b>Failed:</b> {str(e)[:100]}",
-            parse_mode="HTML",
-        )
+        try:
+            await prog_msg.edit_text(
+                f"{get_etag('❌')} <b>Failed:</b> {err_str[:100]}",
+                parse_mode="HTML",
+            )
+        except TelegramBadRequest as _e2:
+            if "message is not modified" not in str(_e2):
+                logger.warning(f"Could not update failure message: {_e2}")
         db.log_download(user_id, info["url"], quality, mtype, "failed")
     finally:
         if filepath:

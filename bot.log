@@ -3678,3 +3678,842 @@ TypeError: process_broadcast() got an unexpected keyword argument 'dispatcher'
 2026-04-18 00:43:01,633 | INFO     | aiogram.event | Update id=55587268 is handled. Duration 484 ms by bot id=8211473742
 2026-04-18 00:43:26,699 | INFO     | aiogram.event | Update id=55587269 is handled. Duration 2417 ms by bot id=8211473742
 2026-04-18 00:44:15,387 | INFO     | aiogram.event | Update id=55587270 is handled. Duration 3217 ms by bot id=8211473742
+2026-04-19 20:03:18,315 | INFO     | __main__ | Starting Polling...
+2026-04-19 20:03:19,307 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-19 20:03:19,323 | INFO     | database.db | Database initialized
+2026-04-19 20:03:19,479 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-19 20:03:19,479 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-19 20:03:19,479 | INFO     | aiogram.dispatcher | Start polling
+2026-04-19 20:03:19,633 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 20:03:20,738 | INFO     | aiogram.event | Update id=55587961 is handled. Duration 503 ms by bot id=8211473742
+2026-04-19 20:03:37,954 | INFO     | aiogram.event | Update id=55587962 is handled. Duration 5637 ms by bot id=8211473742
+2026-04-19 20:05:24,532 | INFO     | aiogram.event | Update id=55587963 is handled. Duration 310 ms by bot id=8211473742
+2026-04-19 20:05:29,290 | INFO     | aiogram.event | Update id=55587964 is handled. Duration 374 ms by bot id=8211473742
+2026-04-19 20:06:00,353 | ERROR    | handlers.download | Download failed: HTTP Client says - Request Entity Too Large
+(background on this error at: https://core.telegram.org/bots/api#sending-files)
+2026-04-19 20:06:09,389 | INFO     | aiogram.event | Update id=55587965 is handled. Duration 497 ms by bot id=8211473742
+2026-04-19 20:08:40,387 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-19 20:08:40,388 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-19 20:08:40,388 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-19 20:08:40,641 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 20:08:40,642 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-19 20:08:45,153 | INFO     | __main__ | Starting Polling...
+2026-04-19 20:08:45,627 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-19 20:08:45,631 | INFO     | database.db | Database initialized
+2026-04-19 20:08:45,775 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-19 20:08:45,775 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-19 20:08:45,775 | INFO     | aiogram.dispatcher | Start polling
+2026-04-19 20:08:45,918 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 20:10:36,094 | INFO     | aiogram.event | Update id=55587966 is handled. Duration 485 ms by bot id=8211473742
+2026-04-19 20:10:50,789 | INFO     | aiogram.event | Update id=55587967 is handled. Duration 258 ms by bot id=8211473742
+2026-04-19 20:10:52,277 | INFO     | aiogram.event | Update id=55587968 is handled. Duration 368 ms by bot id=8211473742
+2026-04-19 20:10:53,698 | INFO     | aiogram.event | Update id=55587969 is handled. Duration 355 ms by bot id=8211473742
+2026-04-19 20:10:54,569 | INFO     | aiogram.event | Update id=55587970 is handled. Duration 407 ms by bot id=8211473742
+2026-04-19 20:10:55,634 | INFO     | aiogram.event | Update id=55587971 is handled. Duration 448 ms by bot id=8211473742
+2026-04-19 20:10:56,728 | INFO     | aiogram.event | Update id=55587972 is handled. Duration 647 ms by bot id=8211473742
+2026-04-19 20:10:57,775 | INFO     | aiogram.event | Update id=55587974 is handled. Duration 352 ms by bot id=8211473742
+2026-04-19 20:10:58,920 | INFO     | aiogram.event | Update id=55587975 is handled. Duration 612 ms by bot id=8211473742
+2026-04-19 20:10:59,261 | INFO     | aiogram.event | Update id=55587973 is handled. Duration 2384 ms by bot id=8211473742
+2026-04-19 20:11:00,053 | INFO     | aiogram.event | Update id=55587976 is handled. Duration 345 ms by bot id=8211473742
+2026-04-19 20:11:02,879 | INFO     | aiogram.event | Update id=55587977 is handled. Duration 330 ms by bot id=8211473742
+2026-04-19 20:17:13,848 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-19 20:17:13,849 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-19 20:17:13,849 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-19 20:17:14,105 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 20:17:14,106 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-19 20:17:24,273 | INFO     | __main__ | Starting Polling...
+2026-04-19 20:17:25,698 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC2
+2026-04-19 20:17:25,698 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:17:25,839 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-19 20:17:27,336 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-19 20:17:27,337 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 20:17:27,343 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:17:27,486 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-19 20:17:27,487 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 20:17:27,938 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 20:17:27,938 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 20:17:27,938 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 20:17:27,938 | INFO     | pyrogram.session.session | Session started
+2026-04-19 20:17:27,940 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 20:17:28,101 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-19 20:17:28,102 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-19 20:17:28,102 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 20:17:28,102 | INFO     | pyrogram.session.session | Session stopped
+2026-04-19 20:17:28,105 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC4
+2026-04-19 20:17:28,105 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:17:28,244 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-19 20:17:29,583 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-19 20:17:29,584 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 20:17:29,588 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:17:29,731 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-19 20:17:29,732 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 20:17:30,177 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 20:17:30,177 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 20:17:30,178 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 20:17:30,178 | INFO     | pyrogram.session.session | Session started
+2026-04-19 20:17:30,178 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 20:17:30,661 | INFO     | pyrogram.dispatcher | Started 16 HandlerTasks
+2026-04-19 20:17:30,662 | INFO     | utils.pyro_client | ✅ Pyrogram (MTProto) started for 2GB support.
+2026-04-19 20:17:30,703 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-19 20:17:30,707 | INFO     | database.db | Database initialized
+2026-04-19 20:17:30,863 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-19 20:17:30,863 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-19 20:17:30,863 | INFO     | aiogram.dispatcher | Start polling
+2026-04-19 20:17:31,012 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 20:17:40,373 | INFO     | aiogram.event | Update id=55587979 is handled. Duration 467 ms by bot id=8211473742
+2026-04-19 20:18:17,997 | INFO     | aiogram.event | Update id=55587980 is handled. Duration 169 ms by bot id=8211473742
+2026-04-19 20:18:29,370 | INFO     | aiogram.event | Update id=55587981 is handled. Duration 3876 ms by bot id=8211473742
+2026-04-19 20:18:34,886 | INFO     | aiogram.event | Update id=55587982 is handled. Duration 351 ms by bot id=8211473742
+2026-04-19 20:18:35,965 | INFO     | aiogram.event | Update id=55587983 is handled. Duration 383 ms by bot id=8211473742
+2026-04-19 20:19:01,417 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:19:01,581 | INFO     | pyrogram.connection.connection | Connected! Production DC4 (media) - IPv4
+2026-04-19 20:19:01,582 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 20:19:02,094 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 20:19:02,094 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 20:19:02,094 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 20:19:02,094 | INFO     | pyrogram.session.session | Session started
+2026-04-19 20:19:02,094 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 20:19:13,228 | INFO     | aiogram.event | Update id=55587984 is not handled. Duration 0 ms by bot id=8211473742
+2026-04-19 20:19:13,755 | INFO     | aiogram.event | Update id=55587985 is not handled. Duration 0 ms by bot id=8211473742
+2026-04-19 20:19:38,097 | INFO     | aiogram.event | Update id=55587986 is not handled. Duration 0 ms by bot id=8211473742
+2026-04-19 20:22:21,649 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-19 20:22:21,650 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-19 20:22:21,650 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-19 20:22:21,908 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 20:22:22,039 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-19 20:22:22,307 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task cancelling name='Task-93' coro=<_run_download() running at C:\MEDIASAVERBOT-main(1)\MEDIASAVERBOT-main\handlers\download.py:220> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at C:\Python314\Lib\asyncio\tasks.py:810]>
+2026-04-19 20:22:22,310 | ERROR    | handlers.download | Download failed: Event loop is closed
+2026-04-19 20:22:22,310 | ERROR    | downloader | Cleanup error: [WinError 32] The process cannot access the file because it is being used by another process: 'downloads\\8267676849_1440p_2483.webm'
+2026-04-19 20:22:22,311 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-109' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 20:22:22,312 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-108' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 20:22:22,312 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-107' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 20:22:22,313 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-106' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 20:22:22,315 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-33' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,315 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-32' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,315 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-31' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,315 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-30' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,315 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-29' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,316 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-28' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,316 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-27' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,316 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-26' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,316 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-25' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,316 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-24' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,316 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-23' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,317 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-22' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,317 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-21' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,317 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-20' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,317 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-19' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:22,317 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-18' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:22:28,840 | INFO     | __main__ | Starting Polling...
+2026-04-19 20:22:30,239 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC2
+2026-04-19 20:22:30,239 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:22:30,389 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-19 20:22:31,923 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-19 20:22:31,924 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 20:22:31,929 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:22:32,071 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-19 20:22:32,072 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 20:22:32,510 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 20:22:32,510 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 20:22:32,510 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 20:22:32,511 | INFO     | pyrogram.session.session | Session started
+2026-04-19 20:22:32,512 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 20:22:32,668 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-19 20:22:32,668 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-19 20:22:32,669 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 20:22:32,669 | INFO     | pyrogram.session.session | Session stopped
+2026-04-19 20:22:32,672 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC4
+2026-04-19 20:22:32,672 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:22:32,818 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-19 20:22:34,418 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-19 20:22:34,419 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 20:22:34,424 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:22:34,565 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-19 20:22:34,566 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 20:22:35,049 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 20:22:35,049 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 20:22:35,050 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 20:22:35,050 | INFO     | pyrogram.session.session | Session started
+2026-04-19 20:22:35,050 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 20:22:35,581 | INFO     | pyrogram.dispatcher | Started 16 HandlerTasks
+2026-04-19 20:22:35,582 | INFO     | utils.pyro_client | ✅ Pyrogram (MTProto) started for 2GB support.
+2026-04-19 20:22:35,624 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-19 20:22:35,627 | INFO     | database.db | Database initialized
+2026-04-19 20:22:35,777 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-19 20:22:35,777 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-19 20:22:35,777 | INFO     | aiogram.dispatcher | Start polling
+2026-04-19 20:22:35,923 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 20:22:40,565 | INFO     | aiogram.event | Update id=55587987 is handled. Duration 4488 ms by bot id=8211473742
+2026-04-19 20:22:42,742 | INFO     | aiogram.event | Update id=55587988 is handled. Duration 353 ms by bot id=8211473742
+2026-04-19 20:22:44,633 | INFO     | aiogram.event | Update id=55587989 is handled. Duration 336 ms by bot id=8211473742
+2026-04-19 20:23:14,116 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:23:14,288 | INFO     | pyrogram.connection.connection | Connected! Production DC4 (media) - IPv4
+2026-04-19 20:23:14,289 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 20:23:14,824 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 20:23:14,825 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 20:23:14,825 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 20:23:14,825 | INFO     | pyrogram.session.session | Session started
+2026-04-19 20:23:14,825 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 20:24:04,904 | INFO     | aiogram.event | Update id=55587990 is not handled. Duration 1 ms by bot id=8211473742
+2026-04-19 20:26:51,760 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-19 20:26:51,761 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-19 20:26:51,761 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-19 20:26:52,023 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 20:26:52,158 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-19 20:26:52,419 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task cancelling name='Task-66' coro=<_run_download() running at C:\MEDIASAVERBOT-main(1)\MEDIASAVERBOT-main\handlers\download.py:258> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at C:\Python314\Lib\asyncio\tasks.py:810]>
+2026-04-19 20:26:52,421 | ERROR    | handlers.download | Download failed: Event loop is closed
+2026-04-19 20:26:52,422 | ERROR    | downloader | Cleanup error: [WinError 32] The process cannot access the file because it is being used by another process: 'downloads\\8267676849_1440p_2732.webm'
+2026-04-19 20:26:52,423 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-83' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 20:26:52,423 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-82' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 20:26:52,424 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-81' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 20:26:52,424 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-80' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 20:26:52,426 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-33' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,427 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-32' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,427 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-31' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,427 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-30' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,427 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-29' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,427 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-28' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,428 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-27' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,428 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-26' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,428 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-25' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,428 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-24' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,428 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-23' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,428 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-22' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,428 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-21' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,429 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-20' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,429 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-19' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:26:52,429 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-18' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 20:27:00,567 | INFO     | __main__ | Starting Polling...
+2026-04-19 20:27:01,944 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC2
+2026-04-19 20:27:01,944 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:27:02,097 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-19 20:27:03,555 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-19 20:27:03,555 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 20:27:03,562 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:27:03,702 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-19 20:27:03,703 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 20:27:04,146 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 20:27:04,147 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 20:27:04,147 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 20:27:04,147 | INFO     | pyrogram.session.session | Session started
+2026-04-19 20:27:04,148 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 20:27:04,298 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-19 20:27:04,298 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-19 20:27:04,299 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 20:27:04,299 | INFO     | pyrogram.session.session | Session stopped
+2026-04-19 20:27:04,302 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC4
+2026-04-19 20:27:04,303 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:27:04,446 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-19 20:27:05,788 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-19 20:27:05,788 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 20:27:05,792 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 20:27:05,919 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-19 20:27:05,919 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 20:27:06,311 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 20:27:06,311 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 20:27:06,311 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 20:27:06,311 | INFO     | pyrogram.session.session | Session started
+2026-04-19 20:27:06,311 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 20:27:06,740 | INFO     | pyrogram.dispatcher | Started 16 HandlerTasks
+2026-04-19 20:27:06,740 | INFO     | utils.pyro_client | ✅ Pyrogram (MTProto) started for 2GB support.
+2026-04-19 20:27:06,782 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-19 20:27:06,785 | INFO     | database.db | Database initialized
+2026-04-19 20:27:06,938 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-19 20:27:06,939 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-19 20:27:06,939 | INFO     | aiogram.dispatcher | Start polling
+2026-04-19 20:27:07,092 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 20:27:12,429 | INFO     | aiogram.event | Update id=55587991 is handled. Duration 5180 ms by bot id=8211473742
+2026-04-19 20:27:14,378 | INFO     | aiogram.event | Update id=55587992 is handled. Duration 509 ms by bot id=8211473742
+2026-04-19 20:27:15,688 | INFO     | aiogram.event | Update id=55587993 is handled. Duration 355 ms by bot id=8211473742
+2026-04-19 20:27:22,251 | ERROR    | handlers.download | Download failed: A coroutine object is required
+2026-04-19 21:01:35,311 | INFO     | aiogram.event | Update id=55587994 is handled. Duration 515 ms by bot id=8211473742
+2026-04-19 21:01:37,104 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-04-19 21:01:37,104 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-19 21:01:42,418 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-04-19 21:01:42,418 | WARNING  | aiogram.dispatcher | Sleep for 1.375156 seconds and try again... (tryings = 1, bot id = 8211473742)
+2026-04-19 21:01:46,816 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-19 21:01:46,817 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-19 21:01:46,817 | WARNING  | aiogram.dispatcher | Sleep for 1.937699 seconds and try again... (tryings = 2, bot id = 8211473742)
+2026-04-19 21:01:47,081 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 21:01:47,082 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-19 21:06:58,665 | INFO     | __main__ | Starting Polling...
+2026-04-19 21:07:00,043 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC2
+2026-04-19 21:07:00,043 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 21:07:00,175 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-19 21:07:01,878 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-19 21:07:01,879 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 21:07:01,885 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 21:07:02,045 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-19 21:07:02,046 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 21:07:02,518 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 21:07:02,518 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 21:07:02,518 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 21:07:02,518 | INFO     | pyrogram.session.session | Session started
+2026-04-19 21:07:02,520 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 21:07:02,683 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-19 21:07:02,683 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-19 21:07:02,683 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 21:07:02,683 | INFO     | pyrogram.session.session | Session stopped
+2026-04-19 21:07:02,687 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC4
+2026-04-19 21:07:02,687 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 21:07:02,834 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-19 21:07:04,339 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-19 21:07:04,339 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 21:07:04,344 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 21:07:04,469 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-19 21:07:04,469 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 21:07:04,856 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 21:07:04,856 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 21:07:04,856 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 21:07:04,856 | INFO     | pyrogram.session.session | Session started
+2026-04-19 21:07:04,857 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 21:07:05,283 | INFO     | pyrogram.dispatcher | Started 16 HandlerTasks
+2026-04-19 21:07:05,283 | INFO     | utils.pyro_client | ✅ Pyrogram (MTProto) started for 2GB support.
+2026-04-19 21:07:05,324 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-19 21:07:05,327 | INFO     | database.db | Database initialized
+2026-04-19 21:07:05,474 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-19 21:07:05,475 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-19 21:07:05,475 | INFO     | aiogram.dispatcher | Start polling
+2026-04-19 21:07:05,621 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 21:07:10,467 | INFO     | aiogram.event | Update id=55587999 is handled. Duration 4694 ms by bot id=8211473742
+2026-04-19 21:07:11,845 | INFO     | aiogram.event | Update id=55588001 is handled. Duration 329 ms by bot id=8211473742
+2026-04-19 21:07:13,361 | INFO     | aiogram.event | Update id=55588002 is handled. Duration 479 ms by bot id=8211473742
+2026-04-19 21:07:14,596 | INFO     | aiogram.event | Update id=55588000 is handled. Duration 8646 ms by bot id=8211473742
+2026-04-19 21:07:43,560 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 21:07:43,727 | INFO     | pyrogram.connection.connection | Connected! Production DC4 (media) - IPv4
+2026-04-19 21:07:43,727 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 21:07:44,237 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 21:07:44,237 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 21:07:44,237 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 21:07:44,237 | INFO     | pyrogram.session.session | Session started
+2026-04-19 21:07:44,237 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 21:13:47,457 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-19 21:13:47,458 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-19 21:13:47,459 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-19 21:13:47,716 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 21:13:47,857 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-19 21:13:48,133 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task cancelling name='Task-75' coro=<_run_download() running at C:\MEDIASAVERBOT-main(1)\MEDIASAVERBOT-main\handlers\download.py:297> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at C:\Python314\Lib\asyncio\tasks.py:810]>
+2026-04-19 21:13:48,136 | ERROR    | handlers.download | Download failed: Event loop is closed
+2026-04-19 21:13:48,137 | ERROR    | downloader | Cleanup error: [WinError 32] The process cannot access the file because it is being used by another process: 'downloads\\8267676849_1440p_5401.webm'
+2026-04-19 21:13:48,137 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-121' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 21:13:48,138 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-120' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 21:13:48,138 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-119' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 21:13:48,139 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-118' coro=<SaveFile.save_file.<locals>.worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\methods\advanced\save_file.py:101>>
+2026-04-19 21:13:48,142 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-33' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,142 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-32' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,142 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-31' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,142 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-30' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,142 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-29' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,143 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-28' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,143 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-27' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,143 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-26' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,143 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-25' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,143 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-24' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,143 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-23' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,143 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-22' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,144 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-21' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,144 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-20' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,144 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-19' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:48,144 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-18' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:13:59,397 | INFO     | __main__ | Starting Polling...
+2026-04-19 21:14:00,886 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC2
+2026-04-19 21:14:00,886 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 21:14:01,030 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-19 21:14:02,817 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-19 21:14:02,818 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 21:14:02,824 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 21:14:02,948 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-19 21:14:02,948 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 21:14:03,328 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 21:14:03,328 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 21:14:03,328 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 21:14:03,328 | INFO     | pyrogram.session.session | Session started
+2026-04-19 21:14:03,329 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 21:14:03,460 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-19 21:14:03,460 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-19 21:14:03,460 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 21:14:03,461 | INFO     | pyrogram.session.session | Session stopped
+2026-04-19 21:14:03,465 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC4
+2026-04-19 21:14:03,465 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 21:14:03,619 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-19 21:14:05,170 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-19 21:14:05,171 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-19 21:14:05,175 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-19 21:14:05,321 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-19 21:14:05,322 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-19 21:14:05,773 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-19 21:14:05,773 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-19 21:14:05,774 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-19 21:14:05,774 | INFO     | pyrogram.session.session | Session started
+2026-04-19 21:14:05,774 | INFO     | pyrogram.session.session | PingTask started
+2026-04-19 21:14:06,250 | INFO     | pyrogram.dispatcher | Started 50 HandlerTasks
+2026-04-19 21:14:06,251 | INFO     | utils.pyro_client | ✅ Pyrogram (MTProto) started for 2GB support.
+2026-04-19 21:14:07,107 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-19 21:14:07,110 | INFO     | database.db | Database initialized
+2026-04-19 21:14:07,254 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-19 21:14:07,254 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-19 21:14:07,255 | INFO     | aiogram.dispatcher | Start polling
+2026-04-19 21:14:07,398 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 21:14:12,643 | INFO     | aiogram.event | Update id=55588003 is handled. Duration 5095 ms by bot id=8211473742
+2026-04-19 21:14:14,240 | INFO     | aiogram.event | Update id=55588004 is handled. Duration 339 ms by bot id=8211473742
+2026-04-19 21:14:15,852 | INFO     | aiogram.event | Update id=55588005 is handled. Duration 330 ms by bot id=8211473742
+2026-04-19 21:14:49,416 | ERROR    | handlers.download | Download failed: [0;31mERROR:[0m Postprocessing: Conversion failed!
+2026-04-19 21:30:57,634 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-19 21:30:57,635 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-19 21:30:57,636 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-19 21:30:57,899 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-19 21:30:57,901 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-19 21:30:58,166 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-67' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,167 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-66' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,167 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-65' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,167 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-64' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,167 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-63' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,167 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-62' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,167 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-61' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,168 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-60' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,168 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-59' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,168 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-58' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,168 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-57' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,168 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-56' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,168 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-55' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,168 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-54' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,168 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-53' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,169 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-52' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,169 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-51' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,169 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-50' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,169 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-49' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,169 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-48' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,169 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-47' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,169 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-46' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,169 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-45' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,170 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-44' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,170 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-43' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,170 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-42' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,170 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-41' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,170 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-40' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,170 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-39' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,170 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-38' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,170 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-37' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,170 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-36' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,171 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-35' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,171 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-34' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,171 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-33' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,171 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-32' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,171 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-31' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,171 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-30' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,172 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-29' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,172 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-28' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,172 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-27' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,172 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-26' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,172 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-25' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,173 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-24' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,173 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-23' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,173 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-22' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,173 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-21' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,173 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-20' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,173 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-19' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-19 21:30:58,173 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-18' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:07:59,509 | INFO     | __main__ | Starting Polling...
+2026-04-20 15:08:00,891 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC2
+2026-04-20 15:08:00,891 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:08:01,033 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 15:08:02,783 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-20 15:08:02,784 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:08:02,789 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:08:02,937 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 15:08:02,938 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 15:08:03,406 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 15:08:03,406 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 15:08:03,406 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 15:08:03,406 | INFO     | pyrogram.session.session | Session started
+2026-04-20 15:08:03,407 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 15:08:03,572 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 15:08:03,573 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 15:08:03,573 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:08:03,573 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 15:08:03,576 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC4
+2026-04-20 15:08:03,577 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:08:03,698 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-20 15:08:04,948 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-20 15:08:04,949 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:08:04,953 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:08:05,088 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-20 15:08:05,089 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 15:08:05,566 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 15:08:05,566 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 15:08:05,566 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 15:08:05,566 | INFO     | pyrogram.session.session | Session started
+2026-04-20 15:08:05,567 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 15:08:06,175 | INFO     | pyrogram.dispatcher | Started 50 HandlerTasks
+2026-04-20 15:08:06,176 | INFO     | utils.pyro_client | ✅ Pyrogram (MTProto) started for 2GB support.
+2026-04-20 15:08:06,176 | INFO     | __main__ | ✅ YouTube cookies loaded from file.
+2026-04-20 15:08:06,177 | INFO     | __main__ | ✅ Generic cookies loaded from file.
+2026-04-20 15:08:06,669 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-20 15:08:06,674 | INFO     | database.db | Database initialized
+2026-04-20 15:08:06,835 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-20 15:08:06,835 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-20 15:08:06,835 | INFO     | aiogram.dispatcher | Start polling
+2026-04-20 15:08:06,984 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 15:08:07,656 | INFO     | aiogram.event | Update id=55588051 is handled. Duration 508 ms by bot id=8211473742
+2026-04-20 15:08:07,720 | INFO     | aiogram.event | Update id=55588050 is handled. Duration 583 ms by bot id=8211473742
+2026-04-20 15:08:15,790 | INFO     | aiogram.event | Update id=55588052 is handled. Duration 4999 ms by bot id=8211473742
+2026-04-20 15:08:16,993 | INFO     | aiogram.event | Update id=55588053 is handled. Duration 425 ms by bot id=8211473742
+2026-04-20 15:08:19,502 | INFO     | aiogram.event | Update id=55588054 is handled. Duration 380 ms by bot id=8211473742
+2026-04-20 15:08:39,549 | ERROR    | handlers.download | Download failed: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2026-04-20 15:09:13,017 | INFO     | aiogram.event | Update id=55588055 is handled. Duration 2425 ms by bot id=8211473742
+2026-04-20 15:09:13,576 | INFO     | aiogram.event | Update id=55588056 is handled. Duration 2401 ms by bot id=8211473742
+2026-04-20 15:09:16,398 | INFO     | aiogram.event | Update id=55588057 is handled. Duration 505 ms by bot id=8211473742
+2026-04-20 15:09:17,776 | INFO     | aiogram.event | Update id=55588058 is handled. Duration 158 ms by bot id=8211473742
+2026-04-20 15:09:19,314 | ERROR    | handlers.download | Download failed: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2026-04-20 15:09:21,615 | INFO     | aiogram.event | Update id=55588059 is handled. Duration 174 ms by bot id=8211473742
+2026-04-20 15:09:39,380 | INFO     | aiogram.event | Update id=55588060 is handled. Duration 1589 ms by bot id=8211473742
+2026-04-20 15:09:59,487 | INFO     | aiogram.event | Update id=55588061 is handled. Duration 331 ms by bot id=8211473742
+2026-04-20 15:10:02,627 | ERROR    | handlers.download | Download failed: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2026-04-20 15:11:18,906 | INFO     | aiogram.event | Update id=55588062 is handled. Duration 2387 ms by bot id=8211473742
+2026-04-20 15:11:21,347 | INFO     | aiogram.event | Update id=55588063 is handled. Duration 1882 ms by bot id=8211473742
+2026-04-20 15:11:30,407 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-20 15:11:30,408 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-20 15:11:30,408 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-20 15:11:30,669 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 15:11:30,670 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-20 15:11:37,228 | INFO     | __main__ | Starting Polling...
+2026-04-20 15:11:38,548 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC2
+2026-04-20 15:11:38,549 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:11:38,699 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 15:11:40,313 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-20 15:11:40,313 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:11:40,319 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:11:40,451 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 15:11:40,452 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 15:11:40,868 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 15:11:40,869 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 15:11:40,869 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 15:11:40,869 | INFO     | pyrogram.session.session | Session started
+2026-04-20 15:11:40,870 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 15:11:41,014 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 15:11:41,014 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 15:11:41,014 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:11:41,014 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 15:11:41,018 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC4
+2026-04-20 15:11:41,018 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:11:41,171 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-20 15:11:42,756 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-20 15:11:42,756 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:11:42,760 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:11:42,892 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-20 15:11:42,893 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 15:11:43,302 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 15:11:43,303 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 15:11:43,303 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 15:11:43,303 | INFO     | pyrogram.session.session | Session started
+2026-04-20 15:11:43,303 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 15:11:43,753 | INFO     | pyrogram.dispatcher | Started 50 HandlerTasks
+2026-04-20 15:11:43,754 | INFO     | utils.pyro_client | ✅ Pyrogram (MTProto) started for 2GB support.
+2026-04-20 15:11:43,755 | INFO     | __main__ | ✅ YouTube cookies loaded from file.
+2026-04-20 15:11:43,755 | INFO     | __main__ | ✅ Generic cookies loaded from file.
+2026-04-20 15:11:43,791 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-20 15:11:43,793 | INFO     | database.db | Database initialized
+2026-04-20 15:11:43,945 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-20 15:11:43,945 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-20 15:11:43,945 | INFO     | aiogram.dispatcher | Start polling
+2026-04-20 15:11:44,089 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 15:11:50,013 | INFO     | aiogram.event | Update id=55588064 is handled. Duration 1454 ms by bot id=8211473742
+2026-04-20 15:12:23,438 | INFO     | aiogram.event | Update id=55588065 is handled. Duration 349 ms by bot id=8211473742
+2026-04-20 15:12:24,795 | INFO     | aiogram.event | Update id=55588066 is handled. Duration 368 ms by bot id=8211473742
+2026-04-20 15:12:27,057 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:12:27,224 | INFO     | pyrogram.connection.connection | Connected! Production DC4 (media) - IPv4
+2026-04-20 15:12:27,224 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 15:12:27,736 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 15:12:27,737 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 15:12:27,737 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 15:12:27,737 | INFO     | pyrogram.session.session | Session started
+2026-04-20 15:12:27,737 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 15:12:28,249 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 15:12:28,249 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 15:12:28,249 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:12:28,249 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 15:12:28,253 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:12:28,431 | INFO     | pyrogram.connection.connection | Connected! Production DC4 (media) - IPv4
+2026-04-20 15:12:28,432 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 15:12:28,963 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 15:12:28,963 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 15:12:28,964 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 15:12:28,964 | INFO     | pyrogram.session.session | Session started
+2026-04-20 15:12:28,965 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 15:12:30,769 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 15:12:30,770 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 15:12:30,770 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:12:30,770 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 15:12:48,165 | INFO     | aiogram.event | Update id=55588067 is handled. Duration 1423 ms by bot id=8211473742
+2026-04-20 15:12:50,748 | INFO     | aiogram.event | Update id=55588068 is handled. Duration 439 ms by bot id=8211473742
+2026-04-20 15:12:57,684 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:12:57,857 | INFO     | pyrogram.connection.connection | Connected! Production DC4 (media) - IPv4
+2026-04-20 15:12:57,857 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 15:12:58,397 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 15:12:58,397 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 15:12:58,397 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 15:12:58,397 | INFO     | pyrogram.session.session | Session started
+2026-04-20 15:12:58,398 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 15:12:58,991 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 15:12:58,992 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 15:12:58,992 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:12:58,992 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 15:12:58,995 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:12:59,165 | INFO     | pyrogram.connection.connection | Connected! Production DC4 (media) - IPv4
+2026-04-20 15:12:59,166 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 15:12:59,693 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 15:12:59,693 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 15:12:59,693 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 15:12:59,693 | INFO     | pyrogram.session.session | Session started
+2026-04-20 15:12:59,694 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 15:13:00,897 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 15:13:00,898 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 15:13:00,898 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:13:00,898 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 15:13:13,997 | INFO     | aiogram.event | Update id=55588069 is handled. Duration 4228 ms by bot id=8211473742
+2026-04-20 15:13:16,431 | INFO     | aiogram.event | Update id=55588070 is handled. Duration 399 ms by bot id=8211473742
+2026-04-20 15:13:18,391 | INFO     | aiogram.event | Update id=55588071 is handled. Duration 350 ms by bot id=8211473742
+2026-04-20 15:13:41,590 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:13:41,765 | INFO     | pyrogram.connection.connection | Connected! Production DC4 (media) - IPv4
+2026-04-20 15:13:41,765 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 15:13:42,306 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 15:13:42,306 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 15:13:42,306 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 15:13:42,306 | INFO     | pyrogram.session.session | Session started
+2026-04-20 15:13:42,307 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 15:13:43,012 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 15:13:43,013 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 15:13:43,013 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:13:43,013 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 15:13:43,016 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 15:13:43,194 | INFO     | pyrogram.connection.connection | Connected! Production DC4 (media) - IPv4
+2026-04-20 15:13:43,195 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 15:13:43,749 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 15:13:43,749 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 15:13:43,749 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 15:13:43,749 | INFO     | pyrogram.session.session | Session started
+2026-04-20 15:13:43,749 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 15:14:32,394 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 15:14:32,394 | INFO     | pyrogram.connection.transport.tcp.tcp | Send exception: ConnectionResetError Connection lost
+2026-04-20 15:14:32,394 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 15:14:32,394 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 15:14:32,394 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 15:20:01,583 | INFO     | aiogram.event | Update id=55588072 is not handled. Duration 1 ms by bot id=8211473742
+2026-04-20 15:20:58,542 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-20 15:20:58,544 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-20 15:20:58,544 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-20 15:20:58,800 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 15:20:58,802 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-20 15:20:59,062 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-67' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,063 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-66' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,063 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-65' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,063 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-64' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,063 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-63' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,063 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-62' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,063 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-61' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,063 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-60' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,063 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-59' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,064 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-58' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,064 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-57' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,064 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-56' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,064 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-55' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,064 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-54' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,064 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-53' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,064 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-52' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,065 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-51' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,065 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-50' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,065 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-49' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,065 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-48' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,065 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-47' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,065 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-46' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,065 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-45' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,065 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-44' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,065 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-43' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,066 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-42' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,066 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-41' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,066 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-40' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,066 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-39' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,066 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-38' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,066 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-37' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,066 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-36' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,067 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-35' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,067 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-34' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,067 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-33' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,067 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-32' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,067 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-31' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,067 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-30' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,067 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-29' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,067 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-28' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,068 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-27' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,068 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-26' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,068 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-25' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,068 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-24' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,068 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-23' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,068 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-22' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,068 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-21' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,068 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-20' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,069 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-19' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>
+2026-04-20 15:20:59,069 | ERROR    | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-18' coro=<Dispatcher.handler_worker() running at C:\Users\arsog\AppData\Roaming\Python\Python314\site-packages\pyrogram\dispatcher.py:343>>

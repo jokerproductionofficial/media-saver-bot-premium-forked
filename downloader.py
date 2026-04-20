@@ -76,6 +76,40 @@ def get_ytdl_opts(platform: str = "generic") -> Dict:
     return opts
 
 
+def _extract_view_count(info_dict: Dict) -> Optional[int]:
+    """
+    Extract the best available view/play count from yt-dlp info dicts.
+    Different platforms expose this under different field names:
+      - YouTube/generic:   view_count
+      - Instagram Reels:   play_count, video_view_count
+      - Twitter/X:         view_count (sometimes missing → use like_count)
+      - TikTok:            view_count or play_count
+    Also checks nested entries[0] for playlist-wrapped responses.
+    """
+    _VIEW_FIELDS = [
+        "view_count", "play_count", "video_view_count",
+        "repost_count",  # Twitter
+        "like_count",    # last-resort proxy
+    ]
+    # Try top-level first
+    for field in _VIEW_FIELDS:
+        val = info_dict.get(field)
+        if val is not None:
+            return int(val)
+
+    # Some extractors wrap real info in entries[0] (e.g. Instagram)
+    entries = info_dict.get("entries") or []
+    if entries:
+        first = entries[0] if isinstance(entries, list) else None
+        if isinstance(first, dict):
+            for field in _VIEW_FIELDS:
+                val = first.get(field)
+                if val is not None:
+                    return int(val)
+
+    return None
+
+
 async def fetch_info(url: str) -> Dict:
     platform = detect_platform(url)
     info_dict = None
@@ -119,7 +153,7 @@ async def fetch_info(url: str) -> Dict:
         "uploader": info_dict.get("uploader", "Unknown"),
         "duration": _format_duration(info_dict.get("duration", 0)),
         "duration_string": _format_duration(info_dict.get("duration", 0)),
-        "view_count": info_dict.get("view_count"),
+        "view_count": _extract_view_count(info_dict),
         "is_youtube": platform == "youtube",
         "media_types": [],
         "available_qualities": available_qualities,

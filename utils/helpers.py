@@ -92,7 +92,11 @@ async def safe_edit(query: CallbackQuery, text: str, reply_markup: InlineKeyboar
             return await query.message.edit_caption(caption=text, reply_markup=reply_markup, parse_mode="HTML")
         return await query.message.edit_text(text, reply_markup=reply_markup, parse_mode="HTML")
     except TelegramBadRequest as e:
-        if "message process failed" in str(e) or "DOCUMENT_INVALID" in str(e):
+        err = str(e)
+        if "message is not modified" in err:
+            # Harmless: content identical to what's already shown — silently ignore.
+            return None
+        if "message process failed" in err or "DOCUMENT_INVALID" in err:
             # Fallback to a new message if editing fails
             return await query.message.answer(text, reply_markup=reply_markup, parse_mode="HTML")
         logger.warning(f"Edit failed: {e}")
@@ -160,6 +164,9 @@ async def guard_user(event: Union[Message, CallbackQuery], bot: Bot) -> bool:
 def format_views(count: Union[int, None]) -> str:
     if count is None:
         return "N/A"
+    count = int(count)
+    if count >= 1_000_000_000:
+        return f"{count/1_000_000_000:.1f}B"
     if count >= 1_000_000:
         return f"{count/1_000_000:.1f}M"
     if count >= 1_000:
