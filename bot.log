@@ -5227,3 +5227,53 @@ task: <Task pending name='Task-18' coro=<Dispatcher.handler_worker() running at 
 2026-04-20 16:48:21,921 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
 2026-04-20 16:48:22,174 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
 2026-04-20 16:48:22,177 | INFO     | __main__ | 👋 Bot Stopped.
+2026-04-20 16:48:28,569 | INFO     | __main__ | Starting Polling...
+2026-04-20 16:48:29,872 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC2
+2026-04-20 16:48:29,872 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:48:30,005 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 16:48:32,218 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-20 16:48:32,218 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:48:32,227 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:48:32,366 | INFO     | pyrogram.connection.connection | Connected! Production DC2 - IPv4
+2026-04-20 16:48:32,367 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 16:48:32,809 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 16:48:32,809 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 16:48:32,810 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 16:48:32,810 | INFO     | pyrogram.session.session | Session started
+2026-04-20 16:48:32,811 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 16:48:32,959 | INFO     | pyrogram.session.session | PingTask stopped
+2026-04-20 16:48:32,960 | INFO     | pyrogram.session.session | NetworkTask stopped
+2026-04-20 16:48:32,960 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:48:32,960 | INFO     | pyrogram.session.session | Session stopped
+2026-04-20 16:48:32,964 | INFO     | pyrogram.session.auth | Start creating a new auth key on DC4
+2026-04-20 16:48:32,964 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:48:33,092 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-20 16:48:34,781 | INFO     | pyrogram.session.auth | Done auth key exchange: DhGenOk
+2026-04-20 16:48:34,781 | INFO     | pyrogram.connection.connection | Disconnected
+2026-04-20 16:48:34,785 | INFO     | pyrogram.connection.connection | Connecting...
+2026-04-20 16:48:34,910 | INFO     | pyrogram.connection.connection | Connected! Production DC4 - IPv4
+2026-04-20 16:48:34,911 | INFO     | pyrogram.session.session | NetworkTask started
+2026-04-20 16:48:35,366 | INFO     | pyrogram.session.session | Session initialized: Layer 220
+2026-04-20 16:48:35,366 | INFO     | pyrogram.session.session | Device: CPython 3.14.2 - Pyrogram 2.3.69
+2026-04-20 16:48:35,366 | INFO     | pyrogram.session.session | System: Windows 11 (en)
+2026-04-20 16:48:35,366 | INFO     | pyrogram.session.session | Session started
+2026-04-20 16:48:35,367 | INFO     | pyrogram.session.session | PingTask started
+2026-04-20 16:48:35,878 | INFO     | pyrogram.dispatcher | Started 50 HandlerTasks
+2026-04-20 16:48:35,878 | INFO     | utils.pyro_client | ✅ Pyrogram (MTProto) started for 2GB support.
+2026-04-20 16:48:35,879 | INFO     | __main__ | ✅ YouTube cookies loaded from file.
+2026-04-20 16:48:35,879 | INFO     | __main__ | ✅ Generic cookies loaded from file.
+2026-04-20 16:48:35,918 | INFO     | __main__ | ✅ System FFmpeg detected.
+2026-04-20 16:48:35,921 | INFO     | database.db | Database initialized
+2026-04-20 16:48:36,047 | INFO     | __main__ | Bot Started: @TestBotForTestWebBot
+2026-04-20 16:48:36,047 | INFO     | __main__ | Custom Emojis & icon_custom_emoji_id active.
+2026-04-20 16:48:36,047 | INFO     | aiogram.dispatcher | Start polling
+2026-04-20 16:48:36,172 | INFO     | aiogram.dispatcher | Run polling for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 16:48:40,351 | INFO     | aiogram.event | Update id=55588180 is handled. Duration 4050 ms by bot id=8211473742
+2026-04-20 16:48:54,943 | INFO     | aiogram.event | Update id=55588181 is handled. Duration 462 ms by bot id=8211473742
+2026-04-20 16:48:57,143 | INFO     | aiogram.event | Update id=55588182 is handled. Duration 364 ms by bot id=8211473742
+2026-04-20 16:49:12,199 | ERROR    | handlers.download | Download failed: name 'math_bold_italic' is not defined
+2026-04-20 16:50:41,404 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-20 16:50:41,405 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-20 16:50:41,405 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-20 16:50:41,657 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 16:50:41,660 | INFO     | __main__ | 👋 Bot Stopped.
