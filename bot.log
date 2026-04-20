@@ -5081,3 +5081,10 @@ task: <Task pending name='Task-18' coro=<Dispatcher.handler_worker() running at 
 2026-04-20 16:21:44,790 | INFO     | aiogram.event | Update id=55588153 is handled. Duration 1667 ms by bot id=8211473742
 2026-04-20 16:21:46,554 | INFO     | aiogram.event | Update id=55588154 is handled. Duration 146 ms by bot id=8211473742
 2026-04-20 16:23:09,437 | INFO     | aiogram.event | Update id=55588155 is not handled. Duration 0 ms by bot id=8211473742
+2026-04-20 16:24:57,592 | INFO     | aiogram.event | Update id=55588156 is not handled. Duration 1 ms by bot id=8211473742
+2026-04-20 16:26:17,202 | INFO     | aiogram.event | Update id=55588157 is not handled. Duration 0 ms by bot id=8211473742
+2026-04-20 16:27:39,114 | INFO     | aiogram.dispatcher | Polling stopped
+2026-04-20 16:27:39,116 | ERROR    | aiogram.dispatcher | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-04-20 16:27:39,116 | WARNING  | aiogram.dispatcher | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8211473742)
+2026-04-20 16:27:39,382 | INFO     | aiogram.dispatcher | Polling stopped for bot @TestBotForTestWebBot id=8211473742 - 'TestBotForTestWeb'
+2026-04-20 16:27:39,383 | INFO     | __main__ | 👋 Bot Stopped.

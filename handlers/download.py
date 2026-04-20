@@ -412,20 +412,16 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
             except Exception:
                 thumb_path = None
 
+        # Final Premium Caption
         caption = (
-            f"{get_etag('✅')} <b>{to_small_caps(info['title'][:50])}</b>\n"
-            f"{get_etag(_PLATFORM_EMOJI.get(info['platform'], '🌐'))} "
-            f"<b>{to_small_caps('Platform')}:</b> {to_small_caps(info['platform'])}\n"
+            f"{get_etag('✅')} <b>{math_bold_italic(info['title'][:60])}</b>\n\n"
+            f"{get_etag('🎬')} <b>{to_small_caps('Platform')}:</b> {to_small_caps(info['platform'])}\n"
             f"{get_etag('📊')} <b>{to_small_caps('Quality')}:</b> {to_small_caps(quality)}"
         )
 
         file_size = os.path.getsize(filepath)
         use_fast_upload = mtype == "v" and file_size >= _FAST_UPLOAD_DOCUMENT_THRESHOLD_BYTES
-        if use_fast_upload:
-            caption += (
-                f"\n{get_etag('⚡')} <b>{to_small_caps('Mode')}:</b> "
-                f"{to_small_caps('Fast File Upload')}"
-            )
+        
         caption += (
             f"\n{get_etag('📦')} <b>{to_small_caps('Size')}:</b> "
             f"{format_bytes(file_size)}"

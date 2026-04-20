@@ -121,6 +121,29 @@ def get_ytdl_opts(platform: str = "generic") -> Dict:
     return opts
 
 
+async def _fetch_youtube_worker_api(url: str) -> Optional[Dict]:
+    """Fetch direct YouTube video URL from a worker API as a fallback."""
+    api_url = f"https://youtube.anshppt19.workers.dev/anshapi?url={url}&format=mp4hd"
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(api_url, timeout=15) as resp:
+                if resp.status == 200:
+                    res = await resp.json()
+                    if res.get("success") and res.get("data"):
+                        data = res["data"]
+                        return {
+                            "id": "ansh_yt_" + str(int(time.time())),
+                            "direct_url": data.get("url_mp4_youtube"),
+                            "title": data.get("name_mp4") or data.get("titre_mp4") or "YouTube Media",
+                            "size": int(data.get("weight_total", 0)),
+                            "ext": "mp4",
+                            "platform": "youtube"
+                        }
+    except Exception as e:
+        logger.warning(f"YouTube worker API fallback failed: {e}")
+    return None
+
+
 def _extract_view_count(info_dict: Dict) -> Optional[int]:
     """
     Extract the best available view/play count from yt-dlp info dicts.
@@ -851,6 +874,29 @@ async def download_media(
                 e,
             )
     else:
+        if platform == "youtube":
+            logger.info("yt-dlp failed on YouTube, trying Worker API fallback...")
+            worker_data = await _fetch_youtube_worker_api(url)
+            if worker_data and worker_data.get("direct_url"):
+                # Use direct download logic for worker URL
+                direct_url = worker_data["direct_url"]
+                filepath = os.path.join(DOWNLOAD_DIR, f"{filename}.mp4")
+                try:
+                    async with aiohttp.ClientSession() as session:
+                        async with session.get(direct_url) as resp:
+                            if resp.status == 200:
+                                with open(filepath, "wb") as f:
+                                    f.write(await resp.read())
+                                return {
+                                    "filepath": filepath,
+                                    "duration_raw": 0,
+                                    "width": 0,
+                                    "height": 0,
+                                    "thumbnail": None
+                                }
+                except Exception as e:
+                    logger.warning(f"Worker API direct download failed: {e}")
+
         raise last_error or ValueError("Download failed: no compatible format found.")
 
     filepath = None
