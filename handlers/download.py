@@ -452,6 +452,7 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
                     user_id,
                     filepath,
                     caption=caption,
+                    parse_mode="HTML",
                     progress=progress_callback,
                     progress_args=args,
                 )
@@ -460,6 +461,7 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
                     user_id,
                     filepath,
                     caption=caption,
+                    parse_mode="HTML",
                     progress=progress_callback,
                     progress_args=args,
                 )
@@ -468,6 +470,7 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
                     chat_id=user_id,
                     document=filepath,
                     caption=caption,
+                    parse_mode="HTML",
                     progress=progress_callback,
                     progress_args=args,
                 )
@@ -476,6 +479,7 @@ async def _run_download(query, bot, info, mtype, quality, prog_msg):
                     chat_id=user_id,
                     video=filepath,
                     caption=caption,
+                    parse_mode="HTML",
                     duration=int(float(results.get("duration_raw") or info.get("duration_raw") or 0)),
                     width=int(float(results.get("width") or 0)),
                     height=int(float(results.get("height") or 0)),
